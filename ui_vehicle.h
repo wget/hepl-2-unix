@@ -34,7 +34,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Vehicule
+class Ui_Vehicle
 {
 public:
     QWidget *centralWidget;
@@ -51,12 +51,12 @@ public:
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
-    void setupUi(QMainWindow *Vehicule)
+    void setupUi(QMainWindow *Vehicle)
     {
-        if (Vehicule->objectName().isEmpty())
-            Vehicule->setObjectName(QString::fromUtf8("Vehicule"));
-        Vehicule->resize(400, 230);
-        centralWidget = new QWidget(Vehicule);
+        if (Vehicle->objectName().isEmpty())
+            Vehicle->setObjectName(QString::fromUtf8("Vehicle"));
+        Vehicle->resize(400, 230);
+        centralWidget = new QWidget(Vehicle);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         labelMessagePatron = new QLabel(centralWidget);
         labelMessagePatron->setObjectName(QString::fromUtf8("labelMessagePatron"));
@@ -93,36 +93,36 @@ public:
         BouttonEnvoyer = new QPushButton(centralWidget);
         BouttonEnvoyer->setObjectName(QString::fromUtf8("BouttonEnvoyer"));
         BouttonEnvoyer->setGeometry(QRect(305, 30, 75, 23));
-        Vehicule->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(Vehicule);
+        Vehicle->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(Vehicle);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 400, 21));
-        Vehicule->setMenuBar(menuBar);
-        statusBar = new QStatusBar(Vehicule);
+        Vehicle->setMenuBar(menuBar);
+        statusBar = new QStatusBar(Vehicle);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        Vehicule->setStatusBar(statusBar);
+        Vehicle->setStatusBar(statusBar);
 
-        retranslateUi(Vehicule);
+        retranslateUi(Vehicle);
 
-        QMetaObject::connectSlotsByName(Vehicule);
+        QMetaObject::connectSlotsByName(Vehicle);
     } // setupUi
 
-    void retranslateUi(QMainWindow *Vehicule)
+    void retranslateUi(QMainWindow *Vehicle)
     {
-        Vehicule->setWindowTitle(QApplication::translate("Vehicule", "Vehicule", 0));
-        labelMessagePatron->setText(QApplication::translate("Vehicule", "Message au patron :", 0));
-        labelMessageRecu->setText(QApplication::translate("Vehicule", "Message recu :", 0));
-        labelIntervention->setText(QApplication::translate("Vehicule", "Intervention chez :", 0));
-        labelEtat->setText(QApplication::translate("Vehicule", "TextLabel", 0));
-        BouttonPause->setText(QApplication::translate("Vehicule", "Pause", 0));
-        BouttonRetour->setText(QApplication::translate("Vehicule", "Retour", 0));
-        BouttonEnvoyer->setText(QApplication::translate("Vehicule", "Envoyer", 0));
+        Vehicle->setWindowTitle(QApplication::translate("Vehicle", "Vehicle", 0));
+        labelMessagePatron->setText(QApplication::translate("Vehicle", "Message au patron :", 0));
+        labelMessageRecu->setText(QApplication::translate("Vehicle", "Message recu :", 0));
+        labelIntervention->setText(QApplication::translate("Vehicle", "Intervention chez :", 0));
+        labelEtat->setText(QApplication::translate("Vehicle", "TextLabel", 0));
+        BouttonPause->setText(QApplication::translate("Vehicle", "Pause", 0));
+        BouttonRetour->setText(QApplication::translate("Vehicle", "Retour", 0));
+        BouttonEnvoyer->setText(QApplication::translate("Vehicle", "Envoyer", 0));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Vehicule: public Ui_Vehicule {};
+    class Vehicle: public Ui_Vehicle {};
 } // namespace Ui
 
 QT_END_NAMESPACE

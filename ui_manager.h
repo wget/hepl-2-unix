@@ -1,5 +1,5 @@
 /********************************************************************************
-** Form generated from reading UI file 'controle.ui'
+** Form generated from reading UI file 'manager.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **
@@ -24,7 +24,7 @@
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Controle
+class Ui_Manager
 {
 public:
     QWidget *centralWidget;
@@ -47,12 +47,12 @@ public:
     QMenuBar *menuBar;
     QStatusBar *statusBar;
 
-    void setupUi(QMainWindow *Controle)
+    void setupUi(QMainWindow *Manager)
     {
-        if (Controle->objectName().isEmpty())
-            Controle->setObjectName(QString::fromUtf8("Controle"));
-        Controle->resize(570, 525);
-        centralWidget = new QWidget(Controle);
+        if (Manager->objectName().isEmpty())
+            Manager->setObjectName(QString::fromUtf8("Manager"));
+        Manager->resize(570, 525);
+        centralWidget = new QWidget(Manager);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         labelV1 = new QLabel(centralWidget);
         labelV1->setObjectName(QString::fromUtf8("labelV1"));
@@ -106,39 +106,39 @@ public:
         BouttonTerminer = new QPushButton(centralWidget);
         BouttonTerminer->setObjectName(QString::fromUtf8("BouttonTerminer"));
         BouttonTerminer->setGeometry(QRect(470, 460, 80, 23));
-        Controle->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(Controle);
+        Manager->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(Manager);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 570, 21));
-        Controle->setMenuBar(menuBar);
-        statusBar = new QStatusBar(Controle);
+        Manager->setMenuBar(menuBar);
+        statusBar = new QStatusBar(Manager);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
-        Controle->setStatusBar(statusBar);
+        Manager->setStatusBar(statusBar);
 
-        retranslateUi(Controle);
+        retranslateUi(Manager);
 
-        QMetaObject::connectSlotsByName(Controle);
+        QMetaObject::connectSlotsByName(Manager);
     } // setupUi
 
-    void retranslateUi(QMainWindow *Controle)
+    void retranslateUi(QMainWindow *Manager)
     {
-        Controle->setWindowTitle(QApplication::translate("Controle", "Controle", 0));
-        labelV1->setText(QApplication::translate("Controle", "Vehicule 1 :", 0));
-        labelV2->setText(QApplication::translate("Controle", "Vehicule 2 :", 0));
-        labelV3->setText(QApplication::translate("Controle", "Vehicule 3 :", 0));
-        labelMessage->setText(QApplication::translate("Controle", "Message :", 0));
-        label_5->setText(QApplication::translate("Controle", "Nouvelle intervention :", 0));
-        BouttonEnregistrer->setText(QApplication::translate("Controle", "Enregistrer", 0));
-        BouttonTransmettre->setText(QApplication::translate("Controle", "Tranmettre", 0));
-        labelMessageRecu->setText(QApplication::translate("Controle", "Message recu :", 0));
-        BouttonFacture->setText(QApplication::translate("Controle", "Facturation", 0));
-        BouttonTerminer->setText(QApplication::translate("Controle", "Terminer", 0));
+        Manager->setWindowTitle(QApplication::translate("Manager", "Manager", 0));
+        labelV1->setText(QApplication::translate("Manager", "Vehicle 1 :", 0));
+        labelV2->setText(QApplication::translate("Manager", "Vehicle 2 :", 0));
+        labelV3->setText(QApplication::translate("Manager", "Vehicle 3 :", 0));
+        labelMessage->setText(QApplication::translate("Manager", "Message :", 0));
+        label_5->setText(QApplication::translate("Manager", "Nouvelle intervention :", 0));
+        BouttonEnregistrer->setText(QApplication::translate("Manager", "Enregistrer", 0));
+        BouttonTransmettre->setText(QApplication::translate("Manager", "Tranmettre", 0));
+        labelMessageRecu->setText(QApplication::translate("Manager", "Message recu :", 0));
+        BouttonFacture->setText(QApplication::translate("Manager", "Facturation", 0));
+        BouttonTerminer->setText(QApplication::translate("Manager", "Terminer", 0));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Controle: public Ui_Controle {};
+    class Manager: public Ui_Manager {};
 } // namespace Ui
 
 QT_END_NAMESPACE

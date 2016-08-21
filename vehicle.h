@@ -4,16 +4,16 @@
 #include <QtWidgets>
 
 namespace Ui {
-class Vehicule;
+class Vehicle;
 }
 
-class Vehicule : public QMainWindow
+class Vehicle : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Vehicule(QWidget *parent = 0);
-    ~Vehicule();
+    explicit Vehicle(QWidget *parent = 0);
+    ~Vehicle();
     void AfficheMessageIntervention(const char*);
     void AfficheMessageRecu(const char*);
     void AfficheEtat(const char*);
@@ -24,7 +24,7 @@ private slots:
     void on_BouttonRetour_clicked();
 
 private:
-    Ui::Vehicule *ui;
+    Ui::Vehicle *ui;
 };
 
 #endif // VEHICULE_H

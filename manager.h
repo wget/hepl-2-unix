@@ -6,16 +6,16 @@
 #include <QtGui/QPainter>
 
 namespace Ui {
-class Controle;
+class Manager;
 }
 
-class Controle : public QMainWindow
+class Manager : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Controle(QWidget *parent = 0);
-    ~Controle();
+    explicit Manager(QWidget *parent = 0);
+    ~Manager();
 
     void AfficheMessageV1(const char* );
     void AfficheMessageV2(const char* );
@@ -36,7 +36,7 @@ private slots:
 
 
 private:
-    Ui::Controle *ui;
+    Ui::Manager *ui;
 };
 
 #endif // CONTROLE_H

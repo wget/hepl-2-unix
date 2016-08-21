@@ -1,6 +1,6 @@
 #include "vehicule.h"
 #include "ui_vehicule.h"
-#include "Ecran.h"
+#include "Screen.h"
 #include "Commun.dat"
 
 #include <signal.h>
@@ -17,12 +17,12 @@ void HandlerAlarm(int);
 
 extern int	idQ,idS,idM;
 extern char	*pShm;
-extern Vehicule*	w;
+extern Vehicle*	w;
 bool    enIntervention,enDeplacement,enPause;
 
-Vehicule::Vehicule(QWidget *parent) :
+Vehicle::Vehicle(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::Vehicule)
+    ui(new Ui::Vehicle)
 {
     ui->setupUi(this);
     enDeplacement = true;
@@ -64,19 +64,19 @@ alarm(5);
 
 }
 
-Vehicule::~Vehicule()
+Vehicle::~Vehicle()
 {
     delete ui;
 }
 
-void Vehicule::on_BouttonEnvoyer_clicked()
+void Vehicle::on_BouttonEnvoyer_clicked()
 {
     Trace("dans on_BouttonEnvoyer_clicked");
     ui->lineMessagePatron->clear();
     ui->lineMessagePatron->setFocus();
 }
 
-void Vehicule::on_BouttonPause_clicked()
+void Vehicle::on_BouttonPause_clicked()
 {
     Trace("dans on_BouttonPause_clicked");
     if (!enPause)
@@ -100,23 +100,23 @@ void Vehicule::on_BouttonPause_clicked()
     ui->lineMessagePatron->setFocus();
 }
 
-void Vehicule::on_BouttonRetour_clicked()
+void Vehicle::on_BouttonRetour_clicked()
 {   Trace("dans on_BouttonRetour_clicked");
     AfficheEtat("Retour au depot");
     ui->lineMessagePatron->setFocus();
 }
 
-void Vehicule::AfficheMessageIntervention(const char* M)
+void Vehicle::AfficheMessageIntervention(const char* M)
 {
     ui->lineMessageIntervention->setText(M);
 }
 
-void Vehicule::AfficheMessageRecu(const char* M)
+void Vehicle::AfficheMessageRecu(const char* M)
 {
     ui->lineMessageRecu->setText(M);
 }
 
-void Vehicule::AfficheEtat(const char* M)
+void Vehicle::AfficheEtat(const char* M)
 {
     ui->labelEtat->setText(M);
 }

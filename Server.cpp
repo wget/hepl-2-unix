@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include "Ecran.h"
+#include "Screen.h"
 #include "Commun.dat"
 
 int	idQ,idS,idM;
@@ -20,7 +20,7 @@ if ((idQ = msgget(CLE,IPC_CREAT | IPC_EXCL |0666)) == -1)
    }
 
 Trace("idQ = %d : idM = %d",idQ,idM);
-int idRechercheChemin;
+int idPathFinder;
 char BuffQ[20];
 sprintf(BuffQ,"%d",idQ);
 
@@ -34,17 +34,17 @@ while (1)
         { case RECHERCHE : printf("Message RECHERCHE\n");
               
               
-              if ((idRechercheChemin = fork()) == -1)
+              if ((idPathFinder = fork()) == -1)
                  { perror("Err de fork()");
                    exit(1);
                  }
-              if (!idRechercheChemin)
-                 { execl("./RechercheChemin","RechercheChemin",BuffQ,NULL);
+              if (!idPathFinder)
+                 { execl("./PathFinder","PathFinder",BuffQ,NULL);
                    perror("Err de execlp()");
                    exit(1);
                  }
-              Message.lType = idRechercheChemin;
-              Trace("----%d",idRechercheChemin);
+              Message.lType = idPathFinder;
+              Trace("----%d",idPathFinder);
               if (msgsnd(idQ,&Message,sizeof(MESSAGE) - sizeof(long),0) == -1)
                   { perror("(serveur)Err de msgsnd()");
                     exit(1);

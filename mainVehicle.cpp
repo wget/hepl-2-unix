@@ -6,14 +6,14 @@
 #include <sys/msg.h>
 #include <sys/shm.h>
 
-#include "Ecran.h"
+#include "Screen.h"
 
 #include "Commun.dat"
 
 int	idQ,idS,idM;
 char	*pShm;
 
-Vehicule*	w;
+Vehicle*	w;
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
     Trace("idQ = %d  idM = %d\n",idQ,idM);
     QApplication a(argc, argv);
-    w = new Vehicule();
+    w = new Vehicle();
     w->show();
 
     return a.exec();

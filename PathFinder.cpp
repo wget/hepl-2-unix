@@ -5,9 +5,9 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
-#include "Ecran.h"
+#include "Screen.h"
 #include "Commun.dat"
-#include "Donnee.dat"
+#include "Data.dat"
 
 MESSAGE	Message;
 MESSAGEMAX	Trajet;

@@ -1,13 +1,13 @@
-#include "controle.h"
+#include "manager.h"
 #include <QApplication>
 
 int	idQ,idS,idM;
 
-Controle*	w;
+Manager*	w;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    w = new Controle();
+    w = new Manager();
     w->show();
 
     return a.exec();

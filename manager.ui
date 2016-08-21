@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Controle</class>
- <widget class="QMainWindow" name="Controle">
+ <class>Manager</class>
+ <widget class="QMainWindow" name="Manager">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Controle</string>
+   <string>Manager</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLabel" name="labelV1">
@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Vehicule 1 :</string>
+     <string>Vehicle 1 :</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelV2">
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Vehicule 2 :</string>
+     <string>Vehicle 2 :</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelV3">
@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Vehicule 3 :</string>
+     <string>Vehicle 3 :</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineV1">

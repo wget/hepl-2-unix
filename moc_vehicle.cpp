@@ -18,31 +18,31 @@
 #endif
 
 QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_Vehicule_t {
+struct qt_meta_stringdata_Vehicle_t {
     QByteArrayData data[5];
     char stringdata0[85];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
-    qptrdiff(offsetof(qt_meta_stringdata_Vehicule_t, stringdata0) + ofs \
+    qptrdiff(offsetof(qt_meta_stringdata_Vehicle_t, stringdata0) + ofs \
         - idx * sizeof(QByteArrayData)) \
     )
-static const qt_meta_stringdata_Vehicule_t qt_meta_stringdata_Vehicule = {
+static const qt_meta_stringdata_Vehicle_t qt_meta_stringdata_Vehicle = {
     {
-QT_MOC_LITERAL(0, 0, 8), // "Vehicule"
+QT_MOC_LITERAL(0, 0, 8), // "Vehicle"
 QT_MOC_LITERAL(1, 9, 25), // "on_BouttonEnvoyer_clicked"
 QT_MOC_LITERAL(2, 35, 0), // ""
 QT_MOC_LITERAL(3, 36, 23), // "on_BouttonPause_clicked"
 QT_MOC_LITERAL(4, 60, 24) // "on_BouttonRetour_clicked"
 
     },
-    "Vehicule\0on_BouttonEnvoyer_clicked\0\0"
+    "Vehicle\0on_BouttonEnvoyer_clicked\0\0"
     "on_BouttonPause_clicked\0"
     "on_BouttonRetour_clicked"
 };
 #undef QT_MOC_LITERAL
 
-static const uint qt_meta_data_Vehicule[] = {
+static const uint qt_meta_data_Vehicle[] = {
 
  // content:
        7,       // revision
@@ -68,10 +68,10 @@ static const uint qt_meta_data_Vehicule[] = {
        0        // eod
 };
 
-void Vehicule::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Vehicle::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Vehicule *_t = static_cast<Vehicule *>(_o);
+        Vehicle *_t = static_cast<Vehicle *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->on_BouttonEnvoyer_clicked(); break;
@@ -83,26 +83,26 @@ void Vehicule::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     Q_UNUSED(_a);
 }
 
-const QMetaObject Vehicule::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_Vehicule.data,
-      qt_meta_data_Vehicule,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+const QMetaObject Vehicle::staticMetaObject = {
+    { &QMainWindow::staticMetaObject, qt_meta_stringdata_Vehicle.data,
+      qt_meta_data_Vehicle,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
-const QMetaObject *Vehicule::metaObject() const
+const QMetaObject *Vehicle::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
 }
 
-void *Vehicule::qt_metacast(const char *_clname)
+void *Vehicle::qt_metacast(const char *_clname)
 {
     if (!_clname) return Q_NULLPTR;
-    if (!strcmp(_clname, qt_meta_stringdata_Vehicule.stringdata0))
-        return static_cast<void*>(const_cast< Vehicule*>(this));
+    if (!strcmp(_clname, qt_meta_stringdata_Vehicle.stringdata0))
+        return static_cast<void*>(const_cast< Vehicle*>(this));
     return QMainWindow::qt_metacast(_clname);
 }
 
-int Vehicule::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int Vehicle::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)

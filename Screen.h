@@ -1,6 +1,6 @@
 /* Exercice 1 :
    Denys MERCENIER
-   Ecran.h
+   Screen.h
 */
 
 #ifndef        ECRAN_H
@@ -25,7 +25,7 @@ using namespace std;
 
 /* fonctions simplifiees de gestion d'ecran */
 
-void EffEcran(void);
+void EffScreen(void);
 int LitChaine(char *,int,int,int,int);
 int LitEntier(int *,int,int,int,int);
 void AffChaine(const char *,int,int,int);
