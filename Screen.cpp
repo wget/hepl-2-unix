@@ -11,113 +11,121 @@
 void EffScreen(void)
 {
 #ifdef CPP
-cout << "0\33[2J" ;
+    cout << "0\33[2J";
 #else
-printf("\033[2J");
+    printf("\033[2J");
 #endif
 }
 
-int LitChaine(char *pChaine,int Lig,int Col,int Attrib,int Lg)
+int LitChaine(char *pChaine, int Lig, int Col, int Attrib, int Lg)
 {
-char        Buffer[255];
-int         L;
+    char Buffer[255];
+    int L;
 
 #ifdef CPP
-cout << "\033[" <<  Lig <<  ";" <<  Col <<  "H\033[" <<  Attrib <<  "m" ;
-cin.getline(Buffer,255);
-cout << "\033[0m";
-L = strlen(Buffer) ;
-if (L >= Lg) L = Lg -1;
-Buffer[L] = '\0';
-strcpy(pChaine,Buffer);
+    cout << "\033[" << Lig << ";" << Col << "H\033[" << Attrib << "m";
+    cin.getline(Buffer, 255);
+    cout << "\033[0m";
+    L = strlen(Buffer);
+    if (L >= Lg)
+	L = Lg - 1;
+    Buffer[L] = '\0';
+    strcpy(pChaine, Buffer);
 #else
-printf("\033[%d;%dH\033[%dm",Lig,Col,Attrib);
-if (fgets(Buffer,255,stdin) == NULL) return -1;
-fflush(stdin);
-L = strlen(Buffer) -1;
-if (L >= Lg) L = Lg -1;
-Buffer[L] = '\0';
-strcpy(pChaine,Buffer);
-printf("\033[%dm",NORM);
-fflush(stdout);
+    printf("\033[%d;%dH\033[%dm", Lig, Col, Attrib);
+    if (fgets(Buffer, 255, stdin) == NULL)
+	return -1;
+    fflush(stdin);
+    L = strlen(Buffer) - 1;
+    if (L >= Lg)
+	L = Lg - 1;
+    Buffer[L] = '\0';
+    strcpy(pChaine, Buffer);
+    printf("\033[%dm", NORM);
+    fflush(stdout);
 #endif
-return L;
+    return L;
 }
 
-int LitEntier(int *Nombre,int Lig,int Col,int Attrib,int Lg)
+int LitEntier(int *Nombre, int Lig, int Col, int Attrib, int Lg)
 {
-char        Buffer[255];
+    char Buffer[255];
 
 #ifdef CPP
-cout << "\033[" <<  Lig <<  ";" <<  Col <<  "H\033[" <<  Attrib <<  "m" ;
-cin.getline(Buffer,255);
-cout << "\033[0m";
-*Nombre = atoi(Buffer);
-if (*Nombre == 0)
-   if (Buffer[0] != '0') return -1;
+    cout << "\033[" << Lig << ";" << Col << "H\033[" << Attrib << "m";
+    cin.getline(Buffer, 255);
+    cout << "\033[0m";
+    *Nombre = atoi(Buffer);
+    if (*Nombre == 0)
+	if (Buffer[0] != '0')
+	    return -1;
 #else
-printf("\033[%d;%dH\033[%dm",Lig,Col,Attrib);
-if (fgets(Buffer,255,stdin) == NULL) return -1;
-fflush(stdin);
-printf("\033[%dm",NORM);
-fflush(stdout);
-*Nombre  = atoi(Buffer);
-if (*Nombre == 0)
-   if (Buffer[0] != '0') return -1;
+    printf("\033[%d;%dH\033[%dm", Lig, Col, Attrib);
+    if (fgets(Buffer, 255, stdin) == NULL)
+	return -1;
+    fflush(stdin);
+    printf("\033[%dm", NORM);
+    fflush(stdout);
+    *Nombre = atoi(Buffer);
+    if (*Nombre == 0)
+	if (Buffer[0] != '0')
+	    return -1;
 #endif
-return 0;
+    return 0;
 }
 
-void AffChaine(const char *pChaine,int Lig,int Col, int Attrib)
+void AffChaine(const char *pChaine, int Lig, int Col, int Attrib)
 {
 #ifdef CPP
-cout << "\033[" <<  Lig <<  ";" <<  Col <<  "H\033[" <<  Attrib <<  "m" <<  pChaine << "\033[0m";
+    cout << "\033[" << Lig << ";" << Col << "H\033[" << Attrib << "m" <<
+	pChaine << "\033[0m";
 #else
-printf("\033[%d;%dH\033[%dm%s\033[%dm",Lig,Col,Attrib,pChaine,NORM);
-fflush(stdout);
+    printf("\033[%d;%dH\033[%dm%s\033[%dm", Lig, Col, Attrib, pChaine,
+	   NORM);
+    fflush(stdout);
 #endif
 }
 
 void Pause(void)
 {
 #ifdef CPP
-char	Buffer[255];
-cin.getline(Buffer,255);
+    char Buffer[255];
+    cin.getline(Buffer, 255);
 #else
-fflush(stdout);
-getchar();
-fflush(stdin);
+    fflush(stdout);
+    getchar();
+    fflush(stdin);
 #endif
-return;
+    return;
 }
 
-void Trace1(const char* pFichier,int Ligne,const char *pTrace, ... )
+void Trace1(const char *pFichier, int Ligne, const char *pTrace, ...)
 {
-char Buffer[255];
-va_list arg;
-va_start(arg,pTrace);
-vsprintf(Buffer,pTrace,arg);
+    char Buffer[255];
+    va_list arg;
+    va_start(arg, pTrace);
+    vsprintf(Buffer, pTrace, arg);
 #ifdef CPP
-cerr << "(" << pFichier << " - " << Ligne << ") " << Buffer << endl;
+    cerr << "(" << pFichier << " - " << Ligne << ") " << Buffer << endl;
 #else
-fprintf(stderr,"(%s - %d) %s\n",pFichier,Ligne,Buffer);
-va_end(arg);
+    fprintf(stderr, "(%s - %d) %s\n", pFichier, Ligne, Buffer);
+    va_end(arg);
 #endif
-return ;
+    return;
 }
 
-void Affiche(const char *pTrace, ... )
+void Affiche(const char *pTrace, ...)
 {
 //#ifdef CPP
 //#else
-char Buffer[80];
-va_list arg;
-va_start(arg,pTrace);
-vsprintf(Buffer,pTrace,arg);
-printf("%s\n",Buffer);
-fflush(stdout);
-va_end(arg);
-return ;
+    char Buffer[80];
+    va_list arg;
+    va_start(arg, pTrace);
+    vsprintf(Buffer, pTrace, arg);
+    printf("%s\n", Buffer);
+    fflush(stdout);
+    va_end(arg);
+    return;
 //#endif
 }
 
@@ -125,8 +133,8 @@ void SortieErreur(char *p, int Rc)
 {
 #ifdef CPP
 #else
-perror(p);
-exit(Rc);
+    perror(p);
+    exit(Rc);
 #endif
 }
 
@@ -134,8 +142,8 @@ void RestitueCurseur()
 {
 #ifdef CPP
 #else
-printf("\0338");
-fflush(stdout);
+    printf("\0338");
+    fflush(stdout);
 #endif
 }
 
@@ -143,7 +151,7 @@ void SauveCurseur()
 {
 #ifdef CPP
 #else
-printf("\0337");
-fflush(stdout);
+    printf("\0337");
+    fflush(stdout);
 #endif
 }

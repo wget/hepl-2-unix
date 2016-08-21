@@ -26,17 +26,17 @@ using namespace std;
 /* fonctions simplifiees de gestion d'ecran */
 
 void EffScreen(void);
-int LitChaine(char *,int,int,int,int);
-int LitEntier(int *,int,int,int,int);
-void AffChaine(const char *,int,int,int);
+int LitChaine(char *, int, int, int, int);
+int LitEntier(int *, int, int, int, int);
+void AffChaine(const char *, int, int, int);
 void Pause(void);
-void Trace1(const char*,int,const char*,...);
+void Trace1(const char *, int, const char *, ...);
 
 #define Trace(...) Trace1(__FILE__,__LINE__,__VA_ARGS__)
 
-void Affiche(const char *,...);
-void SortieErreur(char *,int);
+void Affiche(const char *, ...);
+void SortieErreur(char *, int);
 void SauveCurseur(void);
 void RestitueCurseur(void);
 
-#endif     /* _ECRAN_H_ */
+#endif				/* _ECRAN_H_ */

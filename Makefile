@@ -37,7 +37,7 @@ moc_vehicle.o: vehicle.h
 	moc -o moc_vehicle.cpp vehicle.h
 	$(CC) -c $(CFLAGS) -o $@ moc_vehicle.cpp
 
-Manager: manager.o mainManager.o moc_manager.o Screen.o
+anager: manager.o mainManager.o moc_manager.o Screen.o
 	echo "[+] Creating Manager executable"
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 

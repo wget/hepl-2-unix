@@ -9,23 +9,18 @@
 #include "Screen.h"
 
 #include "Common.dat"
-
-int	idQ,idS,idM;
-char	*pShm;
-
-Vehicle*	w;
-
+int idQ, idS, idM;
+char *pShm;
+Vehicle *w;
 int main(int argc, char *argv[])
 {
-    if ((idQ = msgget(CLE,0)) == -1)
-       { perror("Err de msgget()");
-         exit(1);
-       }
-
-    Trace("idQ = %d  idM = %d\n",idQ,idM);
+    if ((idQ = msgget(CLE, 0)) == -1) {
+	perror("Err de msgget()");
+	exit(1);
+    }
+    Trace("idQ = %d  idM = %d\n", idQ, idM);
     QApplication a(argc, argv);
     w = new Vehicle();
     w->show();
-
     return a.exec();
 }

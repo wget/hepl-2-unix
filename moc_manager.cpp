@@ -17,8 +17,7 @@
 #error "(The moc has changed too much.)"
 #endif
 
-QT_BEGIN_MOC_NAMESPACE
-struct qt_meta_stringdata_Manager_t {
+QT_BEGIN_MOC_NAMESPACE struct qt_meta_stringdata_Manager_t {
     QByteArrayData data[11];
     char stringdata0[175];
 };
@@ -29,93 +28,110 @@ struct qt_meta_stringdata_Manager_t {
     )
 static const qt_meta_stringdata_Manager_t qt_meta_stringdata_Manager = {
     {
-QT_MOC_LITERAL(0, 0, 7), // "Manager"
-QT_MOC_LITERAL(1, 8, 29), // "on_BouttonEnregistrer_clicked"
-QT_MOC_LITERAL(2, 38, 0), // ""
-QT_MOC_LITERAL(3, 39, 25), // "on_BouttonFacture_clicked"
-QT_MOC_LITERAL(4, 65, 29), // "on_BouttonTransmettre_clicked"
-QT_MOC_LITERAL(5, 95, 26), // "on_BouttonTerminer_clicked"
-QT_MOC_LITERAL(6, 122, 12), // "TraceTroncon"
-QT_MOC_LITERAL(7, 135, 9), // "QPainter*"
-QT_MOC_LITERAL(8, 145, 10), // "paintEvent"
-QT_MOC_LITERAL(9, 156, 12), // "QPaintEvent*"
-QT_MOC_LITERAL(10, 169, 5) // "event"
-
-    },
+     QT_MOC_LITERAL(0, 0, 7),	// "Manager"
+     QT_MOC_LITERAL(1, 8, 29),	// "on_BouttonEnregistrer_clicked"
+     QT_MOC_LITERAL(2, 38, 0),	// ""
+     QT_MOC_LITERAL(3, 39, 25),	// "on_BouttonFacture_clicked"
+     QT_MOC_LITERAL(4, 65, 29),	// "on_BouttonTransmettre_clicked"
+     QT_MOC_LITERAL(5, 95, 26),	// "on_BouttonTerminer_clicked"
+     QT_MOC_LITERAL(6, 122, 12),	// "TraceTroncon"
+     QT_MOC_LITERAL(7, 135, 9),	// "QPainter*"
+     QT_MOC_LITERAL(8, 145, 10),	// "paintEvent"
+     QT_MOC_LITERAL(9, 156, 12),	// "QPaintEvent*"
+     QT_MOC_LITERAL(10, 169, 5)	// "event"
+     },
     "Manager\0on_BouttonEnregistrer_clicked\0"
-    "\0on_BouttonFacture_clicked\0"
-    "on_BouttonTransmettre_clicked\0"
-    "on_BouttonTerminer_clicked\0TraceTroncon\0"
-    "QPainter*\0paintEvent\0QPaintEvent*\0"
-    "event"
+	"\0on_BouttonFacture_clicked\0"
+	"on_BouttonTransmettre_clicked\0"
+	"on_BouttonTerminer_clicked\0TraceTroncon\0"
+	"QPainter*\0paintEvent\0QPaintEvent*\0" "event"
 };
+
 #undef QT_MOC_LITERAL
 
 static const uint qt_meta_data_Manager[] = {
 
- // content:
-       7,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       6,   14, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
+    // content:
+    7,				// revision
+    0,				// classname
+    0, 0,			// classinfo
+    6, 14,			// methods
+    0, 0,			// properties
+    0, 0,			// enums/sets
+    0, 0,			// constructors
+    0,				// flags
+    0,				// signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    0,   44,    2, 0x08 /* Private */,
-       3,    0,   45,    2, 0x08 /* Private */,
-       4,    0,   46,    2, 0x08 /* Private */,
-       5,    0,   47,    2, 0x08 /* Private */,
-       6,    3,   48,    2, 0x08 /* Private */,
-       8,    1,   55,    2, 0x08 /* Private */,
+    // slots: name, argc, parameters, tag, flags
+    1, 0, 44, 2, 0x08 /* Private */ ,
+    3, 0, 45, 2, 0x08 /* Private */ ,
+    4, 0, 46, 2, 0x08 /* Private */ ,
+    5, 0, 47, 2, 0x08 /* Private */ ,
+    6, 3, 48, 2, 0x08 /* Private */ ,
+    8, 1, 55, 2, 0x08 /* Private */ ,
 
- // slots: parameters
+    // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 7, QMetaType::Int, QMetaType::Int,    2,    2,    2,
-    QMetaType::Void, 0x80000000 | 9,   10,
+    QMetaType::Void, 0x80000000 | 7, QMetaType::Int, QMetaType::Int, 2, 2,
+    2,
+    QMetaType::Void, 0x80000000 | 9, 10,
 
-       0        // eod
+    0				// eod
 };
 
-void Manager::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void Manager::qt_static_metacall(QObject * _o, QMetaObject::Call _c,
+				 int _id, void **_a)
 {
     if (_c == QMetaObject::InvokeMetaMethod) {
-        Manager *_t = static_cast<Manager *>(_o);
-        Q_UNUSED(_t)
-        switch (_id) {
-        case 0: _t->on_BouttonEnregistrer_clicked(); break;
-        case 1: _t->on_BouttonFacture_clicked(); break;
-        case 2: _t->on_BouttonTransmettre_clicked(); break;
-        case 3: _t->on_BouttonTerminer_clicked(); break;
-        case 4: _t->TraceTroncon((*reinterpret_cast< QPainter*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3]))); break;
-        case 5: _t->paintEvent((*reinterpret_cast< QPaintEvent*(*)>(_a[1]))); break;
-        default: ;
-        }
+	Manager *_t = static_cast < Manager * >(_o);
+	Q_UNUSED(_t)
+	    switch (_id) {
+	case 0:
+	    _t->on_BouttonEnregistrer_clicked();
+	    break;
+	case 1:
+	    _t->on_BouttonFacture_clicked();
+	    break;
+	case 2:
+	    _t->on_BouttonTransmettre_clicked();
+	    break;
+	case 3:
+	    _t->on_BouttonTerminer_clicked();
+	    break;
+	case 4:
+	    _t->TraceTroncon((*reinterpret_cast < QPainter * (*) >
+			      (_a[1])),
+			     (*reinterpret_cast < int (*) > (_a[2])),
+			     (*reinterpret_cast < int (*) > (_a[3])));
+	    break;
+	case 5:
+	    _t->paintEvent((*reinterpret_cast < QPaintEvent * (*) >
+			    (_a[1])));
+	    break;
+	default:;
+	}
     }
 }
 
 const QMetaObject Manager::staticMetaObject = {
-    { &QMainWindow::staticMetaObject, qt_meta_stringdata_Manager.data,
-      qt_meta_data_Manager,  qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
+    {&QMainWindow::staticMetaObject, qt_meta_stringdata_Manager.data,
+     qt_meta_data_Manager, qt_static_metacall, Q_NULLPTR, Q_NULLPTR}
 };
 
 
-const QMetaObject *Manager::metaObject() const
+const QMetaObject *Manager::metaObject() const const const {
+    return QObject::d_ptr->
+	metaObject ? QObject::
+	d_ptr->dynamicMetaObject() : &staticMetaObject;
+} void *Manager::qt_metacast(const char *_clname)
 {
-    return QObject::d_ptr->metaObject ? QObject::d_ptr->dynamicMetaObject() : &staticMetaObject;
-}
-
-void *Manager::qt_metacast(const char *_clname)
-{
-    if (!_clname) return Q_NULLPTR;
+    if (!_clname)
+	return Q_NULLPTR;
     if (!strcmp(_clname, qt_meta_stringdata_Manager.stringdata0))
-        return static_cast<void*>(const_cast< Manager*>(this));
+	return static_cast < void *>(const_cast < Manager * >(this));
     return QMainWindow::qt_metacast(_clname);
 }
 
@@ -123,16 +139,17 @@ int Manager::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
-        return _id;
+	return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+	if (_id < 6)
+	    qt_static_metacall(this, _c, _id, _a);
+	_id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 6)
-            *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 6;
+	if (_id < 6)
+	    *reinterpret_cast < int *>(_a[0]) = -1;
+	_id -= 6;
     }
     return _id;
 }
+
 QT_END_MOC_NAMESPACE
