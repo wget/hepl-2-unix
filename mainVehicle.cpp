@@ -8,7 +8,7 @@
 
 #include "Screen.h"
 
-#include "Commun.dat"
+#include "Common.dat"
 
 int	idQ,idS,idM;
 char	*pShm;

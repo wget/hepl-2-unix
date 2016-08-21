@@ -6,7 +6,7 @@
 #include <sys/msg.h>
 #include <sys/shm.h>
 #include "Screen.h"
-#include "Commun.dat"
+#include "Common.dat"
 #include "Data.dat"
 
 MESSAGE	Message;
