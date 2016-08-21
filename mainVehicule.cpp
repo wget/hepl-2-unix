@@ -1,5 +1,4 @@
 #include "vehicule.h"
-#include <QApplication>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -18,14 +17,14 @@ Vehicule*	w;
 
 int main(int argc, char *argv[])
 {
-if ((idQ = msgget(CLE,0)) == -1)
-   { perror("Err de msgget()");
-     exit(1);
-   }
+    if ((idQ = msgget(CLE,0)) == -1)
+       { perror("Err de msgget()");
+         exit(1);
+       }
 
-Trace("idQ = %d  idM = %d\n",idQ,idM);
+    Trace("idQ = %d  idM = %d\n",idQ,idM);
     QApplication a(argc, argv);
-     w = new Vehicule();
+    w = new Vehicule();
     w->show();
 
     return a.exec();

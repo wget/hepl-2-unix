@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QWidget>
-#include <QPainter>
+#include <QtGui/QPainter>
 
 namespace Ui {
 class Controle;

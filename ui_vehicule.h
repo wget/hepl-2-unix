@@ -10,17 +10,27 @@
 #define UI_VEHICULE_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QStatusBar>
-#include <QtGui/QWidget>
+// #include <QtGui/QAction>
+#include <QtWidgets/QAction>
+// #include <QtGui/QApplication>
+#include <QtWidgets/QApplication>
+// #include <QtGui/QButtonGroup>
+#include <QtWidgets/QButtonGroup>
+// #include <QtGui/QHeaderView>
+#include <QtWidgets/QHeaderView>
+// #include <QtGui/QLabel>
+#include <QtWidgets/QLabel>
+// #include <QtGui/QLineEdit>
+#include <QtWidgets/QLineEdit>
+// #include <QtGui/QMainWindow>
+#include <QtWidgets/QMainWindow>
+// #include <QtGui/QMenuBar>
+#include <QtWidgets/QMenuBar>
+// #include <QtGui/QPushButton>
+#include <QtWidgets/QPushButton>
+// #include <QtGui/QStatusBar>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets>
 
 QT_BEGIN_NAMESPACE
 
@@ -99,14 +109,14 @@ public:
 
     void retranslateUi(QMainWindow *Vehicule)
     {
-        Vehicule->setWindowTitle(QApplication::translate("Vehicule", "Vehicule", 0, QApplication::UnicodeUTF8));
-        labelMessagePatron->setText(QApplication::translate("Vehicule", "Message au patron :", 0, QApplication::UnicodeUTF8));
-        labelMessageRecu->setText(QApplication::translate("Vehicule", "Message recu :", 0, QApplication::UnicodeUTF8));
-        labelIntervention->setText(QApplication::translate("Vehicule", "Intervention chez :", 0, QApplication::UnicodeUTF8));
-        labelEtat->setText(QApplication::translate("Vehicule", "TextLabel", 0, QApplication::UnicodeUTF8));
-        BouttonPause->setText(QApplication::translate("Vehicule", "Pause", 0, QApplication::UnicodeUTF8));
-        BouttonRetour->setText(QApplication::translate("Vehicule", "Retour", 0, QApplication::UnicodeUTF8));
-        BouttonEnvoyer->setText(QApplication::translate("Vehicule", "Envoyer", 0, QApplication::UnicodeUTF8));
+        Vehicule->setWindowTitle(QApplication::translate("Vehicule", "Vehicule", 0));
+        labelMessagePatron->setText(QApplication::translate("Vehicule", "Message au patron :", 0));
+        labelMessageRecu->setText(QApplication::translate("Vehicule", "Message recu :", 0));
+        labelIntervention->setText(QApplication::translate("Vehicule", "Intervention chez :", 0));
+        labelEtat->setText(QApplication::translate("Vehicule", "TextLabel", 0));
+        BouttonPause->setText(QApplication::translate("Vehicule", "Pause", 0));
+        BouttonRetour->setText(QApplication::translate("Vehicule", "Retour", 0));
+        BouttonEnvoyer->setText(QApplication::translate("Vehicule", "Envoyer", 0));
     } // retranslateUi
 
 };

@@ -1,7 +1,7 @@
 #ifndef VEHICULE_H
 #define VEHICULE_H
 
-#include <QMainWindow>
+#include <QtWidgets>
 
 namespace Ui {
 class Vehicule;

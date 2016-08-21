@@ -10,17 +10,17 @@
 #define UI_CONTROLE_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QStatusBar>
-#include <QtGui/QWidget>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -122,17 +122,17 @@ public:
 
     void retranslateUi(QMainWindow *Controle)
     {
-        Controle->setWindowTitle(QApplication::translate("Controle", "Controle", 0, QApplication::UnicodeUTF8));
-        labelV1->setText(QApplication::translate("Controle", "Vehicule 1 :", 0, QApplication::UnicodeUTF8));
-        labelV2->setText(QApplication::translate("Controle", "Vehicule 2 :", 0, QApplication::UnicodeUTF8));
-        labelV3->setText(QApplication::translate("Controle", "Vehicule 3 :", 0, QApplication::UnicodeUTF8));
-        labelMessage->setText(QApplication::translate("Controle", "Message :", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("Controle", "Nouvelle intervention :", 0, QApplication::UnicodeUTF8));
-        BouttonEnregistrer->setText(QApplication::translate("Controle", "Enregistrer", 0, QApplication::UnicodeUTF8));
-        BouttonTransmettre->setText(QApplication::translate("Controle", "Tranmettre", 0, QApplication::UnicodeUTF8));
-        labelMessageRecu->setText(QApplication::translate("Controle", "Message recu :", 0, QApplication::UnicodeUTF8));
-        BouttonFacture->setText(QApplication::translate("Controle", "Facturation", 0, QApplication::UnicodeUTF8));
-        BouttonTerminer->setText(QApplication::translate("Controle", "Terminer", 0, QApplication::UnicodeUTF8));
+        Controle->setWindowTitle(QApplication::translate("Controle", "Controle", 0));
+        labelV1->setText(QApplication::translate("Controle", "Vehicule 1 :", 0));
+        labelV2->setText(QApplication::translate("Controle", "Vehicule 2 :", 0));
+        labelV3->setText(QApplication::translate("Controle", "Vehicule 3 :", 0));
+        labelMessage->setText(QApplication::translate("Controle", "Message :", 0));
+        label_5->setText(QApplication::translate("Controle", "Nouvelle intervention :", 0));
+        BouttonEnregistrer->setText(QApplication::translate("Controle", "Enregistrer", 0));
+        BouttonTransmettre->setText(QApplication::translate("Controle", "Tranmettre", 0));
+        labelMessageRecu->setText(QApplication::translate("Controle", "Message recu :", 0));
+        BouttonFacture->setText(QApplication::translate("Controle", "Facturation", 0));
+        BouttonTerminer->setText(QApplication::translate("Controle", "Terminer", 0));
     } // retranslateUi
 
 };

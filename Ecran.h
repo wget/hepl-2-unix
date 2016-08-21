@@ -20,13 +20,7 @@ using namespace std;
 #else
 #endif
 
-#ifdef SUN
-#include <sys/varargs.h>
-#endif
-
-#ifdef LINUX
 #include <stdarg.h>
-#endif
 
 
 /* fonctions simplifiees de gestion d'ecran */
