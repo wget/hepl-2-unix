@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Manager_t {
     QByteArrayData data[11];
-    char stringdata0[176];
+    char stringdata0[175];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -29,17 +29,17 @@ struct qt_meta_stringdata_Manager_t {
     )
 static const qt_meta_stringdata_Manager_t qt_meta_stringdata_Manager = {
     {
-QT_MOC_LITERAL(0, 0, 8), // "Manager"
-QT_MOC_LITERAL(1, 9, 29), // "on_BouttonEnregistrer_clicked"
-QT_MOC_LITERAL(2, 39, 0), // ""
-QT_MOC_LITERAL(3, 40, 25), // "on_BouttonFacture_clicked"
-QT_MOC_LITERAL(4, 66, 29), // "on_BouttonTransmettre_clicked"
-QT_MOC_LITERAL(5, 96, 26), // "on_BouttonTerminer_clicked"
-QT_MOC_LITERAL(6, 123, 12), // "TraceTroncon"
-QT_MOC_LITERAL(7, 136, 9), // "QPainter*"
-QT_MOC_LITERAL(8, 146, 10), // "paintEvent"
-QT_MOC_LITERAL(9, 157, 12), // "QPaintEvent*"
-QT_MOC_LITERAL(10, 170, 5) // "event"
+QT_MOC_LITERAL(0, 0, 7), // "Manager"
+QT_MOC_LITERAL(1, 8, 29), // "on_BouttonEnregistrer_clicked"
+QT_MOC_LITERAL(2, 38, 0), // ""
+QT_MOC_LITERAL(3, 39, 25), // "on_BouttonFacture_clicked"
+QT_MOC_LITERAL(4, 65, 29), // "on_BouttonTransmettre_clicked"
+QT_MOC_LITERAL(5, 95, 26), // "on_BouttonTerminer_clicked"
+QT_MOC_LITERAL(6, 122, 12), // "TraceTroncon"
+QT_MOC_LITERAL(7, 135, 9), // "QPainter*"
+QT_MOC_LITERAL(8, 145, 10), // "paintEvent"
+QT_MOC_LITERAL(9, 156, 12), // "QPaintEvent*"
+QT_MOC_LITERAL(10, 169, 5) // "event"
 
     },
     "Manager\0on_BouttonEnregistrer_clicked\0"

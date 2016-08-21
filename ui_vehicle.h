@@ -1,5 +1,5 @@
 /********************************************************************************
-** Form generated from reading UI file 'vehicule.ui'
+** Form generated from reading UI file 'vehicle.ui'
 **
 ** Created by: Qt User Interface Compiler version 4.8.6
 **

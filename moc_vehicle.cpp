@@ -1,16 +1,16 @@
 /****************************************************************************
-** Meta object code from reading C++ file 'vehicule.h'
+** Meta object code from reading C++ file 'vehicle.h'
 **
 ** Created by: The Qt Meta Object Compiler version 67 (Qt 5.7.0)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "vehicule.h"
+#include "vehicle.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
-#error "The header file 'vehicule.h' doesn't include <QObject>."
+#error "The header file 'vehicle.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
 #error "This file was generated using the moc from 5.7.0. It"
 #error "cannot be used with the include files from this version of Qt."
@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Vehicle_t {
     QByteArrayData data[5];
-    char stringdata0[85];
+    char stringdata0[84];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -29,11 +29,11 @@ struct qt_meta_stringdata_Vehicle_t {
     )
 static const qt_meta_stringdata_Vehicle_t qt_meta_stringdata_Vehicle = {
     {
-QT_MOC_LITERAL(0, 0, 8), // "Vehicle"
-QT_MOC_LITERAL(1, 9, 25), // "on_BouttonEnvoyer_clicked"
-QT_MOC_LITERAL(2, 35, 0), // ""
-QT_MOC_LITERAL(3, 36, 23), // "on_BouttonPause_clicked"
-QT_MOC_LITERAL(4, 60, 24) // "on_BouttonRetour_clicked"
+QT_MOC_LITERAL(0, 0, 7), // "Vehicle"
+QT_MOC_LITERAL(1, 8, 25), // "on_BouttonEnvoyer_clicked"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 23), // "on_BouttonPause_clicked"
+QT_MOC_LITERAL(4, 59, 24) // "on_BouttonRetour_clicked"
 
     },
     "Vehicle\0on_BouttonEnvoyer_clicked\0\0"

@@ -1,5 +1,5 @@
-#include "vehicule.h"
-#include "ui_vehicule.h"
+#include "vehicle.h"
+#include "ui_vehicle.h"
 #include "Screen.h"
 #include "Commun.dat"
 

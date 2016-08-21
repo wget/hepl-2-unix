@@ -20,7 +20,7 @@ all: Vehicle Manager Server PathFinder
 #$? : More recent dependencies than the target;
 #$^ : All the dependencies;
 #$* : All wildcard character, same as * but syntax interpreted by make
-Vehicle: mainVehicle.o vehicule.o moc_vehicle.o Screen.o
+Vehicle: mainVehicle.o vehicle.o moc_vehicle.o Screen.o
 	echo "[+] Creating Vehicle executable"
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
@@ -28,13 +28,13 @@ mainVehicle.o:
 	echo "[+] Building mainVehicle.o"
 	$(CC) -c $(CFLAGS) -o $@ mainVehicle.cpp
 
-vehicule.o:
-	echo "[+] Building vehicule.o"
-	$(CC) -c $(CFLAGS) -o $@ vehicule.cpp
+vehicle.o:
+	echo "[+] Building vehicle.o"
+	$(CC) -c $(CFLAGS) -o $@ vehicle.cpp
 
-moc_vehicle.o: vehicule.h
+moc_vehicle.o: vehicle.h
 	echo "[+] Building moc_vehicle.o"
-	moc -o moc_vehicle.cpp vehicule.h
+	moc -o moc_vehicle.cpp vehicle.h
 	$(CC) -c $(CFLAGS) -o $@ moc_vehicle.cpp
 
 Manager: manager.o mainManager.o moc_manager.o Screen.o
