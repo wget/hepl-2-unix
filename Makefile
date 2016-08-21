@@ -6,8 +6,8 @@
 .PHONY: clean mrproper
 
 CC		= g++
-CFLAGS	= -W -Wall -march=x86-64 -mtune=generic -O2 -pipe -fPIC -I/usr/include/qt/QtCore -I/usr/include/qt/QtWidgets -I/usr/include/qt/ -I. -I/usr/include
-LDFLAGS	= -I. -I. -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -I. -I. -I/usr/lib/qt/mkspecs/linux-g++ -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread
+CFLAGS	= -W -Wall -march=x86-64 -mtune=generic -O2 -pipe -fPIC -I/usr/include/qt/QtCore -I/usr/include/qt/QtWidgets -I/usr/include/qt/ -I/usr/include -I.
+LDFLAGS	= -I. -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -I/usr/lib/qt/mkspecs/linux-g++ -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread
 
 
 all: Vehicule Controle Serveur RechercheChemin
