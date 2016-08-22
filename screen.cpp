@@ -2,13 +2,13 @@
    Gestion d'un fichier.
    In.Pr.E.S.
    Denys MERCENIER
-   Screen.c
+   screen.c
 */
 
-#include "Screen.h"
+#include "screen.h"
 
 
-void EffScreen(void)
+void Effscreen(void)
 {
 #ifdef CPP
     cout << "0\33[2J";

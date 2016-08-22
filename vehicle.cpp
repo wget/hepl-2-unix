@@ -1,111 +1,126 @@
-#include "vehicle.h"
-#include "ui_vehicle.h"
-#include "Screen.h"
-#include "Common.dat"
-
 #include <signal.h>
 #include <unistd.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
-MESSAGE Message;
-MESSAGEMAX MessageRecu;
-MESSAGEEMIS MessageEmis;
-void HandlerAlarm(int);
+
+#include "vehicle.h"
+#include "vehicle_ui.h"
+#include "screen.h"
+#include "common.h"
+
+Message message;
+MessageMax messageReceived;
+MessageSent messageSent;
+void handlerAlarm(int);
 extern int idQ, idS, idM;
 extern char *pShm;
 extern Vehicle *w;
-bool enIntervention, enDeplacement, enPause;
-Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle)
-{
+bool vehicleCurrentlyOperating, vehicleCurrentlyTravelling, vehicleCurrentlyPausing;
+
+Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle) {
     ui->setupUi(this);
-    enDeplacement = true;
-    enIntervention = false;
-    enPause = false;
+    vehicleCurrentlyTravelling = true;
+    vehicleCurrentlyOperating = false;
+    vehicleCurrentlyPausing = false;
+
     struct sigaction ActAlarm;
-    ActAlarm.sa_handler = HandlerAlarm;
+    ActAlarm.sa_handler = handlerAlarm;
     sigemptyset(&ActAlarm.sa_mask);
     ActAlarm.sa_flags = 0;
     if (sigaction(SIGALRM, &ActAlarm, NULL) == -1) {
-	perror("Err de sigaction()");
-	exit(1);
+        perror("Error in vehicle sigaction()");
+        exit(1);
     }
-    Message.lType = 1L;
-    Message.idProcess = getpid();
-    Message.Requete = RECHERCHE;
-    Message.Depart = 4;
-    if (msgsnd(idQ, &Message, sizeof(MESSAGE) - sizeof(long), 0) == -1) {
-	perror("Err de msgsnd()");
-	exit(1);
+
+    message.type = 1L;
+    message.idProcess = getpid();
+    message.request = REQUEST_SEARCH;
+    message.start = 4;
+
+    if (msgsnd(idQ, &message, sizeof(Message) - sizeof(long), 0) == -1) {
+        perror("Error in vehicle msgsnd()");
+        exit(1);
     }
+
     int rc;
-    if ((rc =
-	 msgrcv(idQ, &MessageRecu, sizeof(MESSAGEMAX) - sizeof(long),
-		getpid(), 0)) == -1) {
-	perror("Err. de msgrcv()");
-	exit(1);
+
+    if ((rc = msgrcv(idQ, &messageReceived, sizeof(MessageMax) - sizeof(long), getpid(), 0)) == -1) {
+        perror("Error in vehicle msgrcv()");
+        exit(1);
     }
-    Trace(" message recu (size : %d)", rc);
+    Trace("Message received (size : %d)", rc);
+
     char Buff[100];
-    sprintf(Buff, "%d  %d  %d  %d  \n", MessageRecu.Message[0],
-	    MessageRecu.Message[1], MessageRecu.Message[2],
-	    MessageRecu.Message[3]);
+    sprintf(Buff, "%d  %d  %d  %d  \n",
+        messageReceived.message[0],
+	    messageReceived.message[1],
+        messageReceived.message[2],
+	    messageReceived.message[3]);
     alarm(5);
-    this->AfficheMessageIntervention(Buff);
-    AfficheEtat("En deplacement");
-    ui->lineMessagePatron->setFocus();
-} Vehicle::~Vehicle()
-{
-    delete ui;
-} void Vehicle::on_BouttonEnvoyer_clicked()
-{
-    Trace("dans on_BouttonEnvoyer_clicked");
-    ui->lineMessagePatron->clear();
-    ui->lineMessagePatron->setFocus();
-} void Vehicle::on_BouttonPause_clicked()
-{
-    Trace("dans on_BouttonPause_clicked");
-    if (!enPause) {
-	this->AfficheEtat("En Pause");
-	enPause = true;
-	return;
-    }
-    if (enIntervention) {
-	this->AfficheEtat("En intervention");
-
-	//enIntervention = false;
-	enPause = false;
-	return;
-    }
-    //if (enDeplacement)
-    {
-	this->AfficheEtat("En deplacement");
-
-	//enDeplacement = false;
-	enPause = false;
-    }
+    this->printMessageIntervention(Buff);
+    printState("Vehicle currently travelling");
     ui->lineMessagePatron->setFocus();
 }
 
-void Vehicle::on_BouttonRetour_clicked()
-{
-    Trace("dans on_BouttonRetour_clicked");
-    AfficheEtat("Retour au depot");
+Vehicle::~Vehicle(){
+    delete ui;
+}
+
+void Vehicle::onSendButtonClicked() {
+    Trace("In vehicle onSendButtonClicked");
+    ui->lineMessagePatron->clear();
     ui->lineMessagePatron->setFocus();
-} void Vehicle::AfficheMessageIntervention(const char *M)
-{
+}
+
+void Vehicle::onPauseButtonClicked() {
+    Trace("In vehicle onPauseButtonClicked");
+    if (!vehicleCurrentlyPausing) {
+        this->printState("Vehicle currently pausing");
+        vehicleCurrentlyPausing = true;
+        return;
+    }
+
+    if (vehicleCurrentlyOperating) {
+        this->printState("Vehicle currently operating");
+
+        //vehicleCurrentlyOperating = false;
+        vehicleCurrentlyPausing = false;
+        return;
+    }
+
+    //if (vehicleCurrentlyTravelling) {
+	this->printState("Vehicle currently travelling");
+
+	//vehicleCurrentlyTravelling = false;
+	vehicleCurrentlyPausing = false;
+    // }
+    ui->lineMessagePatron->setFocus();
+}
+
+void Vehicle::onReturnButtonClicked() {
+    Trace("In vehicle onReturnButtonClicked");
+    printState("Vehicle back to the depot");
+    ui->lineMessagePatron->setFocus();
+}
+
+void Vehicle::printMessageIntervention(const char *M) {
     ui->lineMessageIntervention->setText(M);
-} void Vehicle::AfficheMessageRecu(const char *M)
-{
-    ui->lineMessageRecu->setText(M);
-} void Vehicle::AfficheEtat(const char *M)
-{
-    ui->labelEtat->setText(M);
-} void HandlerAlarm(int)
-{
-    Trace("Reception d'un alarm");	// juste pour la demo
-    enDeplacement = false;
-    enIntervention = true;
-    enPause = false;
-    w->AfficheEtat("En intervention");
+}
+
+void Vehicle::printMessageRecu(const char *M) {
+    ui->lineMessageReceived->setText(M);
+}
+
+void Vehicle::printState(const char *M) {
+    ui->labelState->setText(M);
+}
+
+void handlerAlarm(int) {
+    // For the demo
+    Trace("Vehicle received alarm");
+    vehicleCurrentlyTravelling = false;
+    vehicleCurrentlyOperating = true;
+    vehicleCurrentlyPausing = false;
+    w->printState("Vehicle currently operating");
 }

@@ -24,10 +24,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Message au patron :</string>
+     <string>message au patron :</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelMessageRecu">
+   <widget class="QLabel" name="labelMessageReceived">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -37,10 +37,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Message recu :</string>
+     <string>message recu :</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelIntervention">
+   <widget class="QLabel" name="labelOperation">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -53,7 +53,7 @@
      <string>Intervention chez :</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelEtat">
+   <widget class="QLabel" name="labelState">
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -85,7 +85,7 @@
      <bool>false</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineMessageRecu">
+   <widget class="QLineEdit" name="lineMessageReceived">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -111,7 +111,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonPause">
+   <widget class="QPushButton" name="PauseButton">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -124,7 +124,7 @@
      <string>Pause</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonRetour">
+   <widget class="QPushButton" name="ReturnButton">
     <property name="geometry">
      <rect>
       <x>305</x>
@@ -137,7 +137,7 @@
      <string>Retour</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonEnvoyer">
+   <widget class="QPushButton" name="SendButton">
     <property name="geometry">
      <rect>
       <x>305</x>

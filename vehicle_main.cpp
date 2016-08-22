@@ -6,17 +6,17 @@
 #include <sys/msg.h>
 #include <sys/shm.h>
 
-#include "Screen.h"
+#include "screen.h"
 
-#include "Common.dat"
+#include "common.h"
 int idQ, idS, idM;
 char *pShm;
 Vehicle *w;
 int main(int argc, char *argv[])
 {
-    if ((idQ = msgget(CLE, 0)) == -1) {
-	perror("Err de msgget()");
-	exit(1);
+    if ((idQ = msgget(MSG_QUEUE_KEY, 0)) == -1) {
+        perror("Error in vehicle main msgget()");
+        exit(1);
     }
     Trace("idQ = %d  idM = %d\n", idQ, idM);
     QApplication a(argc, argv);

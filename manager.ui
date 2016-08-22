@@ -102,7 +102,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Message :</string>
+     <string>message :</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineMessage">
@@ -125,10 +125,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Nouvelle intervention :</string>
+     <string>New operation:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineIntervention">
+   <widget class="QLineEdit" name="lineOperation">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -138,7 +138,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonEnregistrer">
+   <widget class="QPushButton" name="SaveButton">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -151,7 +151,7 @@
      <string>Enregistrer</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonTransmettre">
+   <widget class="QPushButton" name="SendButton">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -164,7 +164,7 @@
      <string>Tranmettre</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelMessageRecu">
+   <widget class="QLabel" name="labelMessageReceived">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -174,10 +174,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>Message recu :</string>
+     <string>message recu :</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineMessageRecu">
+   <widget class="QLineEdit" name="lineMessageReceived">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -190,7 +190,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonFacture">
+   <widget class="QPushButton" name="InvoiceButton">
     <property name="geometry">
      <rect>
       <x>470</x>
@@ -203,7 +203,7 @@
      <string>Facturation</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="BouttonTerminer">
+   <widget class="QPushButton" name="FinishButton">
     <property name="geometry">
      <rect>
       <x>470</x>

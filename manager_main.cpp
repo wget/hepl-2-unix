@@ -2,7 +2,7 @@
 #include <QApplication>
 int idQ, idS, idM;
 
-anager *w;
+Manager *w;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
