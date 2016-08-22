@@ -4,58 +4,60 @@
 #include <string.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include "Screen.h"
-#include "Common.dat"
+#include "screen.h"
+#include "common.h"
 
 int idQ, idS, idM;
 char *pShm;
 
-ESSAGE Message;
+Message message;
 
 int main()
 {
-    if ((idQ = msgget(CLE, IPC_CREAT | IPC_EXCL | 0666)) == -1) {
-	perror("Err de msgget()");
-	exit(1);
+    if ((idQ = msgget(MSG_QUEUE_KEY, IPC_CREAT | IPC_EXCL | 0666)) == -1) {
+        perror("Err de msgget()");
+        exit(1);
     }
 
     Trace("idQ = %d : idM = %d", idQ, idM);
-    int idPathFinder;
+    int idpath_finder;
     char BuffQ[20];
     sprintf(BuffQ, "%d", idQ);
 
     while (1) {
-	if (msgrcv(idQ, &Message, sizeof(MESSAGE) - sizeof(long), 1L, 0) ==
-	    -1) {
-	    perror("Err. de msgrcv()");
-	    exit(1);
-	}
-	Trace("Message recu\n");
-	switch (Message.Requete) {
-	case RECHERCHE:
-	    printf("Message RECHERCHE\n");
+        if (msgrcv(idQ, &message, sizeof(Message) - sizeof(long), 1L, 0) ==
+            -1) {
+            perror("Err. de msgrcv()");
+            exit(1);
+        }
 
+        Trace("message recu\n");
 
-	    if ((idPathFinder = fork()) == -1) {
-		perror("Err de fork()");
-		exit(1);
-	    }
-	    if (!idPathFinder) {
-		execl("./PathFinder", "PathFinder", BuffQ, NULL);
-		perror("Err de execlp()");
-		exit(1);
-	    }
-	    Message.lType = idPathFinder;
-	    Trace("----%d", idPathFinder);
-	    if (msgsnd(idQ, &Message, sizeof(MESSAGE) - sizeof(long), 0) ==
-		-1) {
-		perror("(serveur)Err de msgsnd()");
-		exit(1);
-	    }
+        switch (message.request) {
+            case REQUEST_SEARCH:
+                printf("message REQUEST_SEARCH\n");
 
+                if ((idpath_finder = fork()) == -1) {
+                    perror("Err de fork()");
+                    exit(1);
+                }
 
-	    break;
-	}
+                if (!idpath_finder) {
+                    execl("./path_finder", "path_finder", BuffQ, NULL);
+                    perror("Err de execlp()");
+                    exit(1);
+                }
+
+                message.type = idpath_finder;
+                Trace("----%d", idpath_finder);
+
+                if (msgsnd(idQ, &message, sizeof(Message) - sizeof(long), 0) ==  -1) {
+                    perror("(serveur)Err de msgsnd()");
+                    exit(1);
+                }
+
+                break;
+        }
 
     }
 }
