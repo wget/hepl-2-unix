@@ -102,7 +102,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>message :</string>
+     <string>Message :</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineMessage">
@@ -148,7 +148,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Enregistrer</string>
+     <string>Save</string>
     </property>
    </widget>
    <widget class="QPushButton" name="SendButton">
@@ -161,7 +161,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Tranmettre</string>
+     <string>Send</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelMessageReceived">
@@ -174,7 +174,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>message recu :</string>
+     <string>Message received:</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="lineMessageReceived">
@@ -200,7 +200,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Facturation</string>
+     <string>Invoice</string>
     </property>
    </widget>
    <widget class="QPushButton" name="FinishButton">
@@ -213,7 +213,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Terminer</string>
+     <string>Finish</string>
     </property>
    </widget>
   </widget>

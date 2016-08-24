@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>message au patron :</string>
+     <string>Message to the boss:</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelMessageReceived">
@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>message recu :</string>
+     <string>Message received:</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelOperation">
@@ -50,7 +50,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Intervention chez :</string>
+     <string>Operating at:</string>
     </property>
    </widget>
    <widget class="QLabel" name="labelState">
@@ -134,7 +134,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Retour</string>
+     <string>Return</string>
     </property>
    </widget>
    <widget class="QPushButton" name="SendButton">
@@ -147,7 +147,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Envoyer</string>
+     <string>Send</string>
     </property>
    </widget>
   </widget>
