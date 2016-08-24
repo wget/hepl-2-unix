@@ -15,7 +15,9 @@ int idQ;
 
 int search(int currentNode, int destinationNode, int currentSize,
 	       int followedPath[], int optimalPath[], int *sizePath) {
-    int rc, Mrc, i;
+    int rc = 0;
+    int mrc = 0;
+    int i = 0;
 
     if (nodes[currentNode].visit)
         return 0;
@@ -35,11 +37,11 @@ int search(int currentNode, int destinationNode, int currentSize,
         followedPath[currentSize] = nodes[currentNode].nextnodes[i];
         rc = search(nodes[currentNode].nextnodes[i], destinationNode, currentSize + 1, followedPath, optimalPath, sizePath);
         if (rc != 0)
-            Mrc = rc;
+            mrc = rc;
         i++;
     }
     nodes[currentNode].visit = 0;
-    return Mrc;
+    return mrc;
 }
 
 void displayPath(int path[], int sizePath) {
@@ -56,7 +58,7 @@ void displayPath(int path[], int sizePath) {
     return;
 }
 
-int main(int argc, char *argv[]) {
+int main(int, char *argv[]) {
     Log::log(Log::Type::success, Log::Destination::stdout, "In path finder main search");
     int rc;
     int followedPath[55];

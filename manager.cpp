@@ -56,7 +56,7 @@ void Manager::drawSection(QPainter * F, int D, int A) {
 		stations[A].Station);
 }
 
-void Manager::paintEvent(QPaintEvent * event) {
+void Manager::paintEvent(QPaintEvent *) {
     QPainter painter(this);
     painter.setPen(Qt::red);
     painter.setBrush(Qt::red);
