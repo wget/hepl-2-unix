@@ -5,7 +5,7 @@
 #include <sys/ipc.h>
 #include <sys/msg.h>
 #include <sys/shm.h>
-#include "screen.h"
+#include "generic.h"
 #include "common.h"
 #include "path.h"
 
@@ -52,12 +52,12 @@ void displayPath(int path[], int sizePath) {
         sprintf(szBuffer1, "%d ", path[i++]);
         strcat(szBuffer, szBuffer1);
     }
-    Trace("\t(%d) %s", getpid(), szBuffer);
+    Log::log(Log::Type::success, Log::Destination::stdout, std::to_string(getpid()) + " " + szBuffer);
     return;
 }
 
 int main(int argc, char *argv[]) {
-    Trace("In path finder main search");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In path finder main search");
     int rc;
     int followedPath[55];
     int optimalPath[55];
@@ -74,14 +74,14 @@ int main(int argc, char *argv[]) {
     destination = 29;
 
     // For tests
-    Trace("Starting path finder search: %d to %d", message.start, destination);
+    Log::log(Log::Type::success, Log::Destination::stdout, "Starting path finder search: " + std::to_string(message.start) + " to " + std::to_string(destination));
     search(message.start, destination, 0, followedPath, &(optimalPath[1]), &sizePath);
 
-    Trace("path finder results (size %d)", sizePath);
+    Log::log(Log::Type::success, Log::Destination::stdout, "path finder results (size " + std::to_string(sizePath) + ")");
     optimalPath[0] = message.start;
     displayPath(optimalPath, sizePath + 1);
 
-    Trace("path finder displayed results");
+    Log::log(Log::Type::success, Log::Destination::stdout, "path finder displayed results");
     ride.message[0] = message.start;
     memcpy(ride.message, optimalPath, (sizePath + 1) * sizeof(int));
 

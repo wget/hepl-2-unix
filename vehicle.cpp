@@ -6,7 +6,7 @@
 
 #include "vehicle.h"
 #include "vehicle_ui.h"
-#include "screen.h"
+#include "generic.h"
 #include "common.h"
 
 Message message;
@@ -49,7 +49,7 @@ Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle) {
         perror("Error in vehicle msgrcv()");
         exit(1);
     }
-    Trace("Message received (size : %d)", rc);
+    Log::log(Log::Type::success, Log::Destination::stdout, "Message received (size : " + std::to_string(rc));
 
     char Buff[100];
     sprintf(Buff, "%d  %d  %d  %d  \n",
@@ -68,13 +68,13 @@ Vehicle::~Vehicle(){
 }
 
 void Vehicle::onSendButtonClicked() {
-    Trace("In vehicle onSendButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In vehicle onSendButtonClicked");
     ui->lineMessagePatron->clear();
     ui->lineMessagePatron->setFocus();
 }
 
 void Vehicle::onPauseButtonClicked() {
-    Trace("In vehicle onPauseButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In vehicle onPauseButtonClicked");
     if (!vehicleCurrentlyPausing) {
         this->printState("Vehicle currently pausing");
         vehicleCurrentlyPausing = true;
@@ -99,7 +99,7 @@ void Vehicle::onPauseButtonClicked() {
 }
 
 void Vehicle::onReturnButtonClicked() {
-    Trace("In vehicle onReturnButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In vehicle onReturnButtonClicked");
     printState("Vehicle back to the depot");
     ui->lineMessagePatron->setFocus();
 }
@@ -118,7 +118,7 @@ void Vehicle::printState(const char *M) {
 
 void handlerAlarm(int) {
     // For the demo
-    Trace("Vehicle received alarm");
+    Log::log(Log::Type::success, Log::Destination::stdout, "Vehicle received alarm");
     vehicleCurrentlyTravelling = false;
     vehicleCurrentlyOperating = true;
     vehicleCurrentlyPausing = false;

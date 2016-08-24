@@ -1,7 +1,7 @@
 #include <signal.h>
 #include <unistd.h>
 #include "path.h"
-#include "screen.h"
+#include "generic.h"
 #include "manager.h"
 #include "manager_ui.h"
 
@@ -21,21 +21,21 @@ Manager::~Manager() {
 }
 
 void Manager::onSaveButtonClicked() {
-    Trace("In manager onSaveButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In manager onSaveButtonClicked");
     ui->lineOperation->clear();
 }
 
 void Manager::onInvoiceButtonClicked() {
-    Trace("In manager onInvoiceButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In manager onInvoiceButtonClicked");
 }
 
 void Manager::onSendButtonClicked() {
-    Trace("In manager onSendButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In manager onSendButtonClicked");
     ui->lineMessage->clear();
 }
 
 void Manager::onFinishButtonClicked() {
-    Trace("In manager onFinishButtonClicked");
+    Log::log(Log::Type::success, Log::Destination::stdout, "In manager onFinishButtonClicked");
 }
 
 void Manager::drawSection(QPainter * F, int D, int A) {

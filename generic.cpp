@@ -1,157 +1,82 @@
-/* Exercice 1 :
-   Gestion d'un fichier.
-   In.Pr.E.S.
-   Denys MERCENIER
-   screen.c
-*/
+#include "generic.h"
 
-#include "screen.h"
+using namespace std;
 
+void Log::log(Type type, Destination dst, std::string message) {
 
-void Effscreen(void)
-{
-#ifdef CPP
-    cout << "0\33[2J";
-#else
-    printf("\033[2J");
-#endif
+    try {
+
+        if (dst == Log::Destination::syslog) {
+
+            switch(type) {
+                case Log::Type::success:
+                    syslog(LOG_DEBUG, message.c_str());
+                    break;
+                case Log::Type::info:
+                    syslog(LOG_INFO, message.c_str());
+                    break;
+                case Log::Type::error:
+                    syslog(LOG_ERR, message.c_str());
+                    break;
+                case Log::Type::warning:
+                    syslog(LOG_NOTICE, message.c_str());
+                    break;
+                default:
+                    throw Log::TypeError();
+            }
+            return;
+        }
+
+        string messagePrinted;
+
+        switch(type){
+            case Log::Type::success:
+                // The bright effect cannot be combined with another color. The
+                // color will be removed if bright is used.
+                messagePrinted = "["
+                    + Color::Text::Green + "+"
+                    + Color::Text::Reset + "] "
+                    + message;
+                break;
+            case Log::Type::info:
+                messagePrinted = "["
+                    + Color::Text::Blue + "-"
+                    + Color::Text::Reset + "] "
+                    + message;
+                break;
+            case Log::Type::error:
+                messagePrinted = "["
+                    + Color::Text::Red + "x"
+                    + Color::Text::Reset + "] "
+                    + message;
+                break;
+            case Log::Type::warning:
+                messagePrinted = "["
+                    + Color::Text::Yellow + "!"
+                    + Color::Text::Reset + "] "
+                    + message;
+                break;
+            default:
+                throw Log::TypeError();
+        }
+
+        if (dst == Log::Destination::stdout) {
+            cout << messagePrinted << endl;
+        } else if (dst == Log::Destination::stderr) {
+            cerr << messagePrinted << endl;
+        } else {
+            throw Log::DestinationError();
+        }
+
+    } catch (Log::TypeError) {
+        cout << "Log type incorrect. Aborted." << endl;
+        return;
+    } catch (Log::DestinationError) {
+        cout << "Log destination incorrect. Aborted." << endl;
+        return;
+    } catch (Log::Error) {
+        cout << "Log error occurred. Aborted." << endl;
+        return;
+    }
 }
 
-int LitChaine(char *pChaine, int Lig, int Col, int Attrib, int Lg)
-{
-    char Buffer[255];
-    int L;
-
-#ifdef CPP
-    cout << "\033[" << Lig << ";" << Col << "H\033[" << Attrib << "m";
-    cin.getline(Buffer, 255);
-    cout << "\033[0m";
-    L = strlen(Buffer);
-    if (L >= Lg)
-	L = Lg - 1;
-    Buffer[L] = '\0';
-    strcpy(pChaine, Buffer);
-#else
-    printf("\033[%d;%dH\033[%dm", Lig, Col, Attrib);
-    if (fgets(Buffer, 255, stdin) == NULL)
-	return -1;
-    fflush(stdin);
-    L = strlen(Buffer) - 1;
-    if (L >= Lg)
-	L = Lg - 1;
-    Buffer[L] = '\0';
-    strcpy(pChaine, Buffer);
-    printf("\033[%dm", NORM);
-    fflush(stdout);
-#endif
-    return L;
-}
-
-int LitEntier(int *Nombre, int Lig, int Col, int Attrib, int Lg)
-{
-    char Buffer[255];
-
-#ifdef CPP
-    cout << "\033[" << Lig << ";" << Col << "H\033[" << Attrib << "m";
-    cin.getline(Buffer, 255);
-    cout << "\033[0m";
-    *Nombre = atoi(Buffer);
-    if (*Nombre == 0)
-	if (Buffer[0] != '0')
-	    return -1;
-#else
-    printf("\033[%d;%dH\033[%dm", Lig, Col, Attrib);
-    if (fgets(Buffer, 255, stdin) == NULL)
-	return -1;
-    fflush(stdin);
-    printf("\033[%dm", NORM);
-    fflush(stdout);
-    *Nombre = atoi(Buffer);
-    if (*Nombre == 0)
-	if (Buffer[0] != '0')
-	    return -1;
-#endif
-    return 0;
-}
-
-void AffChaine(const char *pChaine, int Lig, int Col, int Attrib)
-{
-#ifdef CPP
-    cout << "\033[" << Lig << ";" << Col << "H\033[" << Attrib << "m" <<
-	pChaine << "\033[0m";
-#else
-    printf("\033[%d;%dH\033[%dm%s\033[%dm", Lig, Col, Attrib, pChaine,
-	   NORM);
-    fflush(stdout);
-#endif
-}
-
-void Pause(void)
-{
-#ifdef CPP
-    char Buffer[255];
-    cin.getline(Buffer, 255);
-#else
-    fflush(stdout);
-    getchar();
-    fflush(stdin);
-#endif
-    return;
-}
-
-void Trace1(const char *pFichier, int Ligne, const char *pTrace, ...)
-{
-    char Buffer[255];
-    va_list arg;
-    va_start(arg, pTrace);
-    vsprintf(Buffer, pTrace, arg);
-#ifdef CPP
-    cerr << "(" << pFichier << " - " << Ligne << ") " << Buffer << endl;
-#else
-    fprintf(stderr, "(%s - %d) %s\n", pFichier, Ligne, Buffer);
-    va_end(arg);
-#endif
-    return;
-}
-
-void Affiche(const char *pTrace, ...)
-{
-//#ifdef CPP
-//#else
-    char Buffer[80];
-    va_list arg;
-    va_start(arg, pTrace);
-    vsprintf(Buffer, pTrace, arg);
-    printf("%s\n", Buffer);
-    fflush(stdout);
-    va_end(arg);
-    return;
-//#endif
-}
-
-void SortieErreur(char *p, int Rc)
-{
-#ifdef CPP
-#else
-    perror(p);
-    exit(Rc);
-#endif
-}
-
-void RestitueCurseur()
-{
-#ifdef CPP
-#else
-    printf("\0338");
-    fflush(stdout);
-#endif
-}
-
-void SauveCurseur()
-{
-#ifdef CPP
-#else
-    printf("\0337");
-    fflush(stdout);
-#endif
-}

@@ -20,7 +20,7 @@ all: vehicle manager server path_finder
 #$? : More recent dependencies than the target;
 #$^ : All the dependencies;
 #$* : All wildcard character, same as * but syntax interpreted by make
-vehicle: vehicle.o vehicle_main.o vehicle_moc.o screen.o
+vehicle: vehicle.o vehicle_main.o vehicle_moc.o generic.o
 	echo "[+] Creating vehicle executable"
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
@@ -41,7 +41,7 @@ vehicle_moc.o: vehicle.h
 	moc -o vehicle_moc.cpp vehicle.h
 	$(CC) -c $(CFLAGS) -o $@ vehicle_moc.cpp
 
-manager: manager.o manager_main.o manager_moc.o screen.o
+manager: manager.o manager_main.o manager_moc.o generic.o
 	echo "[+] Creating manager executable"
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
@@ -62,15 +62,15 @@ manager_moc.o:
 	moc -o manager_moc.cpp manager.h
 	$(CC) -c $(CFLAGS) -o $@ manager_moc.cpp
 
-screen.o:
-	echo "[+] Building screen.o"
-	$(CC) -c $(CFLAGS) screen.cpp 
+generic.o:
+	echo "[+] Building generic.o"
+	$(CC) -c $(CFLAGS) generic.cpp 
 
-server: screen.o
+server: generic.o
 	echo "[+] Creating server executable"
 	$(CC) $(CFLAGS) -o $@ server.cpp $^
 
-path_finder: screen.o
+path_finder: generic.o
 	echo "[+] Creating path_finder executable"
 	$(CC) $(CFLAGS) -o $@ path_finder.cpp $^
 

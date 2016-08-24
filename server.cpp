@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include "screen.h"
+#include "generic.h"
 #include "common.h"
 
 int idQ, idS, idM;
@@ -19,7 +19,7 @@ int main()
         exit(1);
     }
 
-    Trace("idQ = %d : idM = %d", idQ, idM);
+    Log::log(Log::Type::success, Log::Destination::stdout, "idQ = " + std::to_string(idQ) + " : idM = " + std::to_string(idM));
     int idpath_finder;
     char BuffQ[20];
     sprintf(BuffQ, "%d", idQ);
@@ -27,32 +27,32 @@ int main()
     while (1) {
         if (msgrcv(idQ, &message, sizeof(Message) - sizeof(long), 1L, 0) ==
             -1) {
-            perror("Err. de msgrcv()");
+            perror("Error in server msgrcv()");
             exit(1);
         }
 
-        Trace("message recu\n");
+        Log::log(Log::Type::success, Log::Destination::stdout, "Message received");
 
         switch (message.request) {
             case REQUEST_SEARCH:
-                printf("message REQUEST_SEARCH\n");
+                printf("message REQUEST_SEARCH");
 
                 if ((idpath_finder = fork()) == -1) {
-                    perror("Err de fork()");
+                    perror("Error in server fork");
                     exit(1);
                 }
 
                 if (!idpath_finder) {
                     execl("./path_finder", "path_finder", BuffQ, NULL);
-                    perror("Err de execlp()");
+                    perror("Error in server execlp");
                     exit(1);
                 }
 
                 message.type = idpath_finder;
-                Trace("----%d", idpath_finder);
+                Log::log(Log::Type::success, Log::Destination::stdout, "----" + std::to_string(idpath_finder));
 
                 if (msgsnd(idQ, &message, sizeof(Message) - sizeof(long), 0) ==  -1) {
-                    perror("(serveur)Err de msgsnd()");
+                    perror("Error in server msgsnd");
                     exit(1);
                 }
 
