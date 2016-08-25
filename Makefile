@@ -5,7 +5,7 @@
 # directive avoids this issue.
 .PHONY: clean mrproper
 
-CC		= g++
+CC		= g++ -g
 CFLAGS	= -W -Wall -march=x86-64 -mtune=generic -O2 -pipe -fPIC -I/usr/include/qt/QtCore -I/usr/include/qt/QtWidgets -I/usr/include/qt/ -I/usr/include -I.
 LDFLAGS	= -I. -isystem /usr/include/qt -isystem /usr/include/qt/QtWidgets -isystem /usr/include/qt/QtGui -isystem /usr/include/qt/QtCore -I/usr/lib/qt/mkspecs/linux-g++ -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread
 
@@ -24,7 +24,9 @@ vehicle: vehicle.o vehicle_main.o vehicle_moc.o generic.o
 	echo "[+] Creating vehicle executable"
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-vehicle.o: vehicle.cpp vehicle_ui.h
+# For compilation, the gcc default is to take the source file and replace its
+# extension by .o. Specifying -o is in this use case, unneeded.
+vehicle.o: vehicle.cpp vehicle.h vehicle_ui.h generic.h common.h
 	echo "[+] Building vehicle.o"
 	$(CC) -c $(CFLAGS) -o $@ $<
 
@@ -34,7 +36,7 @@ vehicle_ui.h: vehicle.ui
 	echo "[+] Building vehicle_ui.h"
 	uic -o $@ $<
 
-vehicle_main.o: vehicle_main.cpp
+vehicle_main.o: vehicle_main.cpp generic.h common.h
 	echo "[+] Building vehicle_main.o"
 	$(CC) -c $(CFLAGS) -o $@ $<
 
@@ -52,7 +54,7 @@ manager: manager.o manager_main.o manager_moc.o generic.o
 	echo "[+] Creating manager executable"
 	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
-manager.o: manager.cpp manager_ui.h
+manager.o: manager.cpp manager.h manager_ui.h generic.h path.h
 	echo "[+] Building manager.o"
 	$(CC) -c $(CFLAGS) -o $@ $<
 
@@ -60,7 +62,7 @@ manager_ui.h: manager.ui
 	echo "[+] Building manager_ui.h"
 	uic -o $@ $<
 
-manager_main.o: manager_main.cpp
+manager_main.o: manager_main.cpp manager.h
 	echo "[+] Building manager_main.o"
 	$(CC) -c $(CFLAGS) -o $@ $<
 
@@ -72,15 +74,15 @@ manager_moc.cpp: manager.h
 	echo "[+] Building manager_moc.cpp"
 	moc -o $@ $<
 
-generic.o: generic.cpp
+generic.o: generic.cpp generic.h
 	echo "[+] Building generic.o"
 	$(CC) -c $(CFLAGS) $<
 
-server: server.cpp generic.o
+server: server.cpp generic.o generic.h common.h
 	echo "[+] Creating server executable"
 	$(CC) $(CFLAGS) -o $@ $^
 
-path_finder: path_finder.cpp generic.o
+path_finder: path_finder.cpp generic.o generic.h
 	echo "[+] Creating path_finder executable"
 	$(CC) $(CFLAGS) -o $@ $^
 
