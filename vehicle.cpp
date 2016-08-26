@@ -28,6 +28,10 @@ using namespace std;
 
 Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle) {
     ui->setupUi(this);
+    this->manageTasks();
+}
+
+void Vehicle::manageTasks() {
 
     struct sigaction actionAlarm;
     actionAlarm.sa_handler = handlerAlarm;
@@ -171,6 +175,8 @@ Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle) {
         Log::Type::success,
         Log::Destination::stdout,
         "Vehicle: No more operation. Do not ask another one.");
+
+
 }
 
 Vehicle::~Vehicle(){
