@@ -1,5 +1,6 @@
-#include "manager.h"
 #include <QApplication>
+#include "manager.h"
+
 int idQ, idS, idM;
 
 Manager *w;

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GENERIC_H
+#define GENERIC_H
 
 #include <iostream>
 #include <string>
@@ -72,16 +73,6 @@ namespace Effect {
     static const std::string Reset="[0m";
 }
 
-    // class Log {
-    //
-    //     private:
-    //         Log() {}
-    //
-    //     public:
-    //         static void write(Log::Type type, Log::Destination dst, std::string message);
-    //
-    // };
-
 namespace Log {
 
     enum class Type { success, info, error, warning };
@@ -102,3 +93,4 @@ namespace Log {
     void log(Type type, Destination dst, std::string message);
 
 }
+#endif // GENERIC_H

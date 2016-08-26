@@ -1,3 +1,5 @@
+#ifndef PATH_H
+#define PATH_H
 typedef struct {
     int visit;
     int nextnodes[6];
@@ -108,3 +110,4 @@ Section	sections[] = {
 };
 
 
+#endif // PATH_H
