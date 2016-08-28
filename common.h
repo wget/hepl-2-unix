@@ -3,8 +3,11 @@
 #include <unistd.h>
 
 // According to instructions, the depot is reported to be at A4, which
-// is the 3rd column in the global stations[] variable table.
-#define DEPOT_LOCATION 3
+// is the 3rd y in the global stations[] variable table.
+#define DEPOT_LOCATION 4
+
+#define TIME_TO_TRAVEL 5
+#define TIME_TO_OPERATE 5
 
 #define REQUEST_MESSAGE_MAX_PATH 20
 #define REQUEST_MESSAGE_MAX 80
@@ -41,7 +44,8 @@ typedef enum {
     VEHICLE_TRAVELLING,
     VEHICLE_OPERATING,
     VEHICLE_PAUSING,
-    VEHICLE_BACK_DEPOT
+    VEHICLE_BACK_DEPOT,
+    VEHICLE_NEXT_OPERATION
 } VehicleState;
 
 #define INTERVENTIONS_FILE "interventions.txt"

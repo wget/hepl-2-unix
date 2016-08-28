@@ -51,15 +51,17 @@ void displayPath(int path[], int sizePath) {
     char szBuffer[80];
     char szBuffer1[80];
 
-    sprintf(szBuffer, "(%d)   ", sizePath);
-    while (i < sizePath) {
-        sprintf(szBuffer1, "%d ", path[i++]);
+    sprintf(szBuffer, "(size: %d)   ", sizePath);
+    for (i = 0; i < sizePath; i++) {
+        sprintf(szBuffer1, "%d(%s) ", path[i], stations[path[i]].stationName);
         strcat(szBuffer, szBuffer1);
     }
     Log::log(
         Log::Type::success,
         Log::Destination::stdout,
-        std::to_string(getpid()) + " " + szBuffer);
+        "Path finder (" + std::to_string(messageToVehicle.type)
+        + "): "
+        + szBuffer);
     return;
 }
 
@@ -67,15 +69,19 @@ int main(int, char *argv[]) {
     Log::log(
         Log::Type::success,
         Log::Destination::stdout,
-        "Path finder: Main");
+        // Escape ? char to avoid trigraphs to be triggered
+        // http://stackoverflow.com/a/1234618/3514658
+        "Path finder (?\?\?\?): Main");
 
     int rc;
     int followedPath[55];
     int optimalPath[55];
     int sizePath = 0;
     string destinationName;
+    string destinationDescription;
     int destination = 0;
     bool destinationExecuted = false;
+    unsigned int numberOfStations = sizeof(stations) / sizeof(Station);
 
     // Receive the message queue id by argument to the process
     idQ = atoi(argv[1]);
@@ -85,7 +91,10 @@ int main(int, char *argv[]) {
         Log::log(
             Log::Type::error,
             Log::Destination::stdout,
-            std::string("Path finder: Unable to receive message from message queue: ") + strerror(errno));
+            // Escape ? char to avoid trigraphs to be triggered
+            // http://stackoverflow.com/a/1234618/3514658
+            std::string("Path finder (?\?\?\?): Unable to receive message from message queue: ")
+            + strerror(errno));
         exit(1);
     }
 
@@ -99,7 +108,8 @@ int main(int, char *argv[]) {
         Log::log(
             Log::Type::error,
             Log::Destination::stdout,
-            "Server: Unable to open INTERVENTIONS_FILE in read mode.");
+            "Path finder (" + std::to_string(messageToVehicle.type)
+            + "): Unable to open INTERVENTIONS_FILE in read mode.");
         exit(1);
     }
 
@@ -110,14 +120,13 @@ int main(int, char *argv[]) {
         Log::log(
             Log::Type::success,
             Log::Destination::stdout,
-            "Server: Reading from file: " + line);
+            "Path finder (" + std::to_string(messageToVehicle.type)
+            + "): Reading from file: " + line);
 
         // strtok wants a char* while string.c_str() returns a const char*.
         // Let's duplicate our string content to a plain old char array à la C.
         free(stringToParse);
         stringToParse = strdup(line.c_str());
-
-        cout << "DEBUG: \"" + string(stringToParse) << "\"" << endl;
 
         // Parse the destination number
         tokenizedString = strtok(stringToParse, INTERVENTIONS_FILE_SEPARATOR);
@@ -125,10 +134,38 @@ int main(int, char *argv[]) {
             Log::log(
                 Log::Type::warning,
                 Log::Destination::stdout,
-                "Path finder: Error while parsing: \"" + line + "\". Skipping line.");
+                "Path finder (" + std::to_string(messageToVehicle.type)
+                + "): Error while parsing: \"" + line + "\". Skipping line.");
             continue;
         }
-        destination = atoi(tokenizedString);
+
+        // Research if destination valid. We need to find the index in the stations[] table
+        unsigned int stationNumber = 0;
+        for (stationNumber = 0; stationNumber < numberOfStations; stationNumber++) {
+            if (!strcmp(tokenizedString, stations[stationNumber].stationName)) {
+                destinationName = stations[stationNumber].stationName;
+                break;
+            }
+        }
+
+        if (stationNumber == numberOfStations) {
+            Log::log(
+                Log::Type::warning,
+                Log::Destination::stdout,
+                "Path finder (" + std::to_string(messageToVehicle.type)
+                + "): Station not found. Skipping line.");
+            continue;
+        } else {
+
+            Log::log(
+                Log::Type::warning,
+                Log::Destination::stdout,
+                "Path finder (" + std::to_string(messageToVehicle.type)
+                + "): Station number = "
+                + to_string(stationNumber));
+        }
+
+        destination = stationNumber;
 
         // Parse the destination name
         tokenizedString = strtok(NULL, INTERVENTIONS_FILE_SEPARATOR);
@@ -136,14 +173,17 @@ int main(int, char *argv[]) {
             Log::log(
                 Log::Type::warning,
                 Log::Destination::stdout,
-                "Path finder: Error while parsing: \"" + line + "\". Skipping line.");
+                "Path finder (" + std::to_string(messageToVehicle.type)
+                + "): Error while parsing: \"" + line + "\". Skipping line.");
             continue;
         }
-        destinationName = tokenizedString;
-            Log::log(
-                Log::Type::warning,
-                Log::Destination::stdout,
-                "Path finder: destination name \"" + string(tokenizedString) + "\"");
+        destinationDescription = tokenizedString;
+
+        Log::log(
+            Log::Type::warning,
+            Log::Destination::stdout,
+            "Path finder (" + std::to_string(messageToVehicle.type)
+            + "): Destination name \"" + string(tokenizedString) + "\"");
 
         // Parse the execution
         tokenizedString = strtok(NULL, INTERVENTIONS_FILE_SEPARATOR);
@@ -151,7 +191,8 @@ int main(int, char *argv[]) {
             Log::log(
                 Log::Type::warning,
                 Log::Destination::stdout,
-                "Path finder: Error while parsing: \"" + line + "\". Skipping line.");
+                "Path finder (" + std::to_string(messageToVehicle.type)
+                + "): Error while parsing: \"" + line + "\". Skipping line.");
             continue;
         }
         destinationExecuted = (atoi(tokenizedString) != 0);
@@ -160,24 +201,26 @@ int main(int, char *argv[]) {
             Log::log(
                 Log::Type::success,
                 Log::Destination::stdout,
-                "Path finder: The destination \"" + destinationName + "\" has been executed. Skipping line.");
+                "Path finder (" + std::to_string(messageToVehicle.type)
+                + "): The destination \""
+                + destinationName
+                + "\" has been executed. Skipping line.");
             destination = -1;
             destinationName.clear();
             destinationExecuted = false;
             continue;
         }
 
-        // Here we are sure the variable have been initialized. 
+        // Here we are sure the parsed variables have been initialized. 
 
         int filePosition = interventionFile.tellg();
-        cout << "File filePosition = " << filePosition << endl;
 
         // Write in the file the task has been executed
         interventionFile.seekp(filePosition - 1 - line.length(), ios::beg);
         interventionFile
-            << destination
-            << INTERVENTIONS_FILE_SEPARATOR
             << destinationName
+            << INTERVENTIONS_FILE_SEPARATOR
+            << destinationDescription
             << INTERVENTIONS_FILE_SEPARATOR
             << "1"
             << endl;
@@ -185,40 +228,42 @@ int main(int, char *argv[]) {
         Log::log(
             Log::Type::success,
             Log::Destination::stdout,
-            "Path finder: Task " + std::to_string(destination) + "; " + destinationName + " now set as executed.");
+            "Path finder (" + std::to_string(messageToVehicle.type)
+            + "): Task "
+            + std::to_string(destination)
+            + "; " + destinationName
+            + " now set as executed.");
         break;
     }
 
-    // The temporary char array might not be freed if we have reached the end
+    // The temporary char array might not get freed if we have reached the end
     // of the file. Must make sure manually as we are freeing at the next loop
     // iteration.
     if (stringToParse != NULL) {
         free(stringToParse);
     }
 
-    // If not enough destination, go back to the depot.
-    if (destination == 0) {
+    // If not destination enough, send the vehicle back to the depot.
+    // As interventionFile is a stream, detect if we reached end of file.
+    if (!interventionFile) {
         Log::log(
             Log::Type::success,
             Log::Destination::stdout,
-            "Path finder: No destination available. Sending vehicle to the depot.");
+            "Path finder (" + std::to_string(messageToVehicle.type)
+            + "): No destination available. Sending vehicle back to depot.");
         // According to instructions, the depot is reported to be at A4, which
-        // is the 3rd column in the global stations[] variable table.
+        // is the 3rd y in the global stations[] variable table.
         destination = DEPOT_LOCATION;
     }
 
     Log::log(
         Log::Type::success,
         Log::Destination::stdout,
-        "Path finder: Searching from " + std::to_string(message.start) + " to " + std::to_string(destination));
-
-    // Make sure the message body is empty in order to determine the size of
-    // the message and find the last element of the message to detect the
-    // depot.
-    // memset(messageToVehicle.message, 0, sizeof(messageToVehicle.message));
-    // for (unsigned int i=0; i< sizeof(messageToVehicle.message); i++) {
-    //     cout << "Debug: " << i << ": \"" + messageToVehicle.message[i] << "\"" << endl;
-    // }
+        "Path finder (" + std::to_string(messageToVehicle.type)
+        + "): Searching from "
+        + stations[message.start].stationName
+        + " to "
+        + stations[destination].stationName);
 
     // Find the shortest path
     search(message.start, destination, 0, followedPath, &(optimalPath[1]), &sizePath);
@@ -226,7 +271,8 @@ int main(int, char *argv[]) {
     Log::log(
         Log::Type::success,
         Log::Destination::stdout,
-        "Path finder: Search results (size " + std::to_string(sizePath) + ")");
+        "Path finder (" + std::to_string(messageToVehicle.type)
+        + "): Search results (size " + std::to_string(sizePath) + ")");
 
     optimalPath[0] = message.start;
     // Display the path as debug info
@@ -234,20 +280,23 @@ int main(int, char *argv[]) {
 
     messageToVehicle.message[0] = message.start;
     memcpy(messageToVehicle.message, optimalPath, (sizePath + 1) * sizeof(int));
-    cout << "debug ------> here" << endl;
 
     if (msgsnd(idQ, &messageToVehicle, sizeof(int) * (sizePath + 1) + sizeof(pid_t) + sizeof(int), 0) == -1) {
         Log::log(
             Log::Type::error,
             Log::Destination::stdout,
-            std::string("Path finder: Unable to send message to vehicle (" + std::to_string(messageToVehicle.idProcess) + ")"));
+            "Path finder (" + std::to_string(messageToVehicle.type)
+            + "): Unable to send message to vehicle ("
+            + std::to_string(messageToVehicle.idProcess)
+            + ")");
         exit(1);
     }
 
     Log::log(
         Log::Type::success,
         Log::Destination::stdout,
-        "Path finder: " + std::to_string(getpid()) + " exited with successful.");
+        "Path finder (" + std::to_string(messageToVehicle.type)
+        + "): Exited with successful.");
     exit(0);
 }
 

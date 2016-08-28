@@ -53,12 +53,12 @@ int main(int argc, char *argv[])
             "Server: Creating fictive list of interventions");
 
         std::vector<std::string> records = {
-            "4;Batibouw;0",
-            "7;Arch Linux;0",
-            "12;Some values;0",
-            "6;Love mum;0",
-            "8;Seraing;0",
-            "9;Evil;0"};
+            "C3;Batibouw;0",
+            "D1;Arch Linux;0"};
+            // "12;Some values;0",
+            // "6;Love mum;0",
+            // "8;Seraing;0",
+            // "9;Evil;0"};
 
         {
             ofstream interventionFile(INTERVENTIONS_FILE);

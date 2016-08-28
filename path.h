@@ -6,15 +6,14 @@ typedef struct {
 } Node;
 
 typedef struct {
-    int row;
-    int column;
+    int x;
+    int y;
 } Location;
 
 typedef struct {
-    // Station name
-    char Station[20];
-    Location stationLocation;
-    Location realLocation;
+    char stationName[20];
+    Location textLocation;
+    Location dotLocation;
 } Station;
 
 typedef struct {
@@ -23,6 +22,7 @@ typedef struct {
 } Section;
 
 Node nodes[] = {
+    // Visited, stations around
     { 0,{ 0, 0, 0, 0, 0, 0}},
     { 0,{ 2,24,17, 0, 0, 0}},     // 1
     { 0,{ 1, 3,32, 0, 0, 0}},
@@ -61,10 +61,11 @@ Node nodes[] = {
 
 Station stations[] = {
     {"",0,0,0,0},
+    // Coordinates for (X, Y) for text / coordinates (X, Y) for dot
     {"A1",200,20,200,20},     // 1
     {"A2",260,34,260,40},     // 2
     {"A3",240,78,260,80},
-    {"A4",210,150,240,140},
+    {"A4",210,150,240,140},   // 4 --> DEPOT_LOCATION
     {"A5",320,190,320,200},   // 5
     {"A6",400,275,400,260},
     {"A7",530,275,540,260},   // 7

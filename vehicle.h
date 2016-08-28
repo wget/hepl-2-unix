@@ -17,7 +17,6 @@ public:
     void printMessageIntervention(const char *);
     void printMessageRecu(const char *);
     void printState(const char *);
-    void manageTasks();
 
 private slots:
     void onSendButtonClicked();

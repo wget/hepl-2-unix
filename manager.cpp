@@ -41,19 +41,19 @@ void Manager::onFinishButtonClicked() {
 void Manager::drawSection(QPainter * F, int D, int A) {
     F->setPen(Qt::black);
     F->drawLine(
-        stations[D].realLocation.row,
-        stations[D].realLocation.column,
-        stations[A].realLocation.row,
-		stations[A].realLocation.column);
+        stations[D].dotLocation.x,
+        stations[D].dotLocation.y,
+        stations[A].dotLocation.x,
+		stations[A].dotLocation.y);
     F->setPen(Qt::red);
     F->drawText(
-        stations[D].stationLocation.row,
-        stations[D].stationLocation.column,
-		stations[D].Station);
+        stations[D].textLocation.x,
+        stations[D].textLocation.y,
+		stations[D].stationName);
     F->drawText(
-        stations[A].stationLocation.row,
-        stations[A].stationLocation.column,
-		stations[A].Station);
+        stations[A].textLocation.x,
+        stations[A].textLocation.y,
+		stations[A].stationName);
 }
 
 void Manager::paintEvent(QPaintEvent *) {

@@ -26,7 +26,7 @@ vehicle: vehicle.o vehicle_main.o vehicle_moc.o generic.o
 
 # For compilation, the gcc default is to take the source file and replace its
 # extension by .o. Specifying -o is in this use case, unneeded.
-vehicle.o: vehicle.cpp vehicle.h vehicle_ui.h generic.h common.h
+vehicle.o: vehicle.cpp vehicle.h vehicle_ui.h generic.h common.h path.h
 	echo "[+] Building vehicle.o"
 	$(CC) -c $(CFLAGS) -o $@ $<
 
