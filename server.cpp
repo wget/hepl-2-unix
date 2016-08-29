@@ -20,8 +20,7 @@ Message message;
 
 void cleanup(int);
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
 
     struct sigaction sigAction;
     sigAction.sa_handler = cleanup;
@@ -108,8 +107,10 @@ int main(int argc, char *argv[])
     int idpath_finder;
 
     // Used to send the queue ID to the path_finder process as an argument to execl
-    char BuffQ[20];
-    sprintf(BuffQ, "%d", idQ);
+    char bufferQueueId[20];
+    sprintf(bufferQueueId, "%d", idQ);
+
+    pid_t vehicles[NUMBER_VEHICLE_MAX] = {0};
 
     while (1) {
         // Get all requests identified by the type 1L sent by vehicles.
@@ -119,6 +120,35 @@ int main(int argc, char *argv[])
                 Log::Destination::stdout,
                 std::string("Server: Unable to receive message from message queue: ") + strerror(errno));
             exit(1);
+        }
+
+        // Keep vehicles ID
+        for (unsigned int i = 0; i < NUMBER_VEHICLE_MAX; i++) {
+
+            // If the vehicle is already in the list, do not save it.
+            if (vehicles[i] == message.idProcess) {
+                break;
+            }
+
+            if (vehicles[i]) {
+
+                // Prevent another vehicle to connect if the maximum has been
+                // reached.
+                if (i == NUMBER_VEHICLE_MAX - 1) {
+                    kill(message.idProcess, SIGINT);
+                    break;
+                }
+            }
+            
+            if (!vehicles[i]) {
+                Log::log(
+                    Log::Type::success,
+                    Log::Destination::stdout,
+                    "Server: New vehicle detected: "
+                    + to_string(message.idProcess));
+                vehicles[i] = message.idProcess;
+                break;
+            }
         }
 
         Log::log(
@@ -143,7 +173,7 @@ int main(int argc, char *argv[])
 
                 // The new fork will enter the branch and change the execution by path_finder
                 if (!idpath_finder) {
-                    execl("./path_finder", "path_finder", BuffQ, NULL);
+                    execl("./path_finder", "path_finder", bufferQueueId, NULL);
                     Log::log(
                         Log::Type::error,
                         Log::Destination::stdout,
@@ -174,7 +204,6 @@ int main(int argc, char *argv[])
                     "Server: Message received is a REQUEST_VEHICLE_STATE_REPORT");
 
                 switch (message.start) {
-
 
                     case VEHICLE_PAUSING:
                         Log::log(
@@ -222,7 +251,44 @@ int main(int argc, char *argv[])
                 }
 
                 break;
-                
+
+            case REQUEST_VEHICLE_QUIT:
+                for (unsigned int i = 0; i < NUMBER_VEHICLE_MAX; i++) {
+                    Log::log(
+                        Log::Type::success,
+                        Log::Destination::stdout,
+                        "Server: Vehicle list ("
+                        + to_string(i)
+                        + "): "
+                        + to_string(vehicles[i]));
+                }
+
+                // Remove idProcess from vehicle list
+                for (unsigned int i = 0; i < NUMBER_VEHICLE_MAX; i++) {
+                    if (vehicles[i] == message.idProcess) {
+                        while (i < NUMBER_VEHICLE_MAX - 1) {
+                            vehicles[i] = vehicles[i + 1];
+                            i++;
+                        }
+                        vehicles[i] = 0;
+                        Log::log(
+                            Log::Type::success,
+                            Log::Destination::stdout,
+                            "Server: Vehicle ("
+                            + std::to_string(message.idProcess)
+                            + ") removed from list.");
+                        for (i = 0; i < NUMBER_VEHICLE_MAX; i++) {
+                            Log::log(
+                                Log::Type::success,
+                                Log::Destination::stdout,
+                                "Server: Vehicle list ("
+                                + to_string(i)
+                                + "): "
+                                + to_string(vehicles[i]));
+                        }
+                    }
+                }
+                break;
         }
 
     }

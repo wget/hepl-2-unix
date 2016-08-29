@@ -9,6 +9,8 @@
 #define TIME_TO_TRAVEL 5
 #define TIME_TO_OPERATE 5
 
+#define NUMBER_VEHICLE_MAX 3
+
 #define REQUEST_MESSAGE_MAX_PATH 20
 #define REQUEST_MESSAGE_MAX 80
 #define MSG_QUEUE_KEY (key_t)1234
@@ -57,5 +59,6 @@ typedef enum {
 #define REQUEST_IDENTIFICATION_MANAGER 3
 #define REQUEST_NUM_VEHICLE            4
 #define REQUEST_STOP                   5
+#define REQUEST_VEHICLE_QUIT           6
 
 #endif // COMMON_H

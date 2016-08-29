@@ -179,12 +179,6 @@ int main(int, char *argv[]) {
         }
         destinationDescription = tokenizedString;
 
-        Log::log(
-            Log::Type::warning,
-            Log::Destination::stdout,
-            "Path finder (" + std::to_string(messageToVehicle.type)
-            + "): Destination name \"" + string(tokenizedString) + "\"");
-
         // Parse the execution
         tokenizedString = strtok(NULL, INTERVENTIONS_FILE_SEPARATOR);
         if (tokenizedString == NULL) {

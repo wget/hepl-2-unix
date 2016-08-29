@@ -15,14 +15,10 @@ Message message;
 MessageMax messageReceived;
 MessageSent messageVehicleState;
 void handlerAlarm(int);
+void handlerInterruption(int, siginfo_t *info, void *);
 extern int idQ, idS, idM;
 extern char *pShm;
 extern Vehicle *w;
-struct sigaction actionAlarm;
-// bool vehicleCurrentlyOperating = false;
-// bool vehicleCurrentlyTravelling = false;
-// bool vehicleCurrentlyPausing = false;
-// bool vehicleAtDepot = true;
 bool vehicleIsAtDepot = false;
 bool returnToDepotRequested = false;
 int secondsElapsed = 0;
@@ -37,6 +33,8 @@ Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle) {
     ui->setupUi(this);
 
     // Init all label instead of having the default "textlabel" label. 
+    // Cannot even be used in this constructor without risking to have a core
+    // dump.
     // w->printState("At the depot");
 
     // Since the purpose of this application is not to play with C++/Qt stuffs,
@@ -48,6 +46,20 @@ Vehicle::Vehicle(QWidget * parent):QMainWindow(parent), ui(new Ui::Vehicle) {
     // those not in this list:
     // http://man7.org/linux/man-pages/man7/signal.7.html otherwise the
     // behavior is undefined too.
+    //
+    struct sigaction actionInterruption;
+    actionInterruption.sa_sigaction = handlerInterruption;
+    sigemptyset(&actionInterruption.sa_mask);
+    actionInterruption.sa_flags = SA_SIGINFO;
+    if (sigaction(SIGINT, &actionInterruption, NULL) == -1) {
+        Log::log(
+            Log::Type::error,
+            Log::Destination::stdout,
+            std::string("Vehicle: Unable to arm the SIGINT signal: ") + strerror(errno));
+        exit(1);
+    }
+
+    struct sigaction actionAlarm;
     actionAlarm.sa_handler = handlerAlarm;
     sigemptyset(&actionAlarm.sa_mask);
     actionAlarm.sa_flags = 0;
@@ -346,4 +358,36 @@ void handlerAlarm(int) {
     // Ask the OS to send a SIGALRM to the process after the number of
     // seconds has elapsed.
     alarm(1);
+}
+
+void handlerInterruption(int, siginfo_t *info, void *) {
+
+    Log::log(
+        Log::Type::success,
+        Log::Destination::stdout,
+        "Vehicle: Received SIGINT from "
+        + to_string(info->si_pid)
+        + ". Leaving.");
+
+    // Send state to server
+    message.type = 1L;
+    message.idProcess = getpid();
+    message.request = REQUEST_VEHICLE_QUIT;
+    message.start = 0;
+    if (msgsnd(idQ, &message, sizeof(Message) - sizeof(long), 0) == -1) {
+        Log::log(
+            Log::Type::error,
+            Log::Destination::stdout,
+            std::string("Vehicle: Unable to send message (vehicle request quit) to message queue: ")
+            + strerror(errno));
+        exit(1);
+    }
+
+    Log::log(
+        Log::Type::success,
+        Log::Destination::stdout,
+        "Vehicle: Has quit.");
+
+    exit(0);
+
 }
